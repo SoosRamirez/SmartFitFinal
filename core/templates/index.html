@@ -13,7 +13,7 @@
     <link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon">
 </head>
 <body>
-<header {% if user.is_authenticated %}class="header logged" {% else %}class="header"{% endif %}>
+<header {% if user.is_authenticated %}class="header logged"{% else %}class="header"{% endif %}>
     <div class="modal-background modal-disabled" id='login-modal-background'></div>
     <div class="modal modal-disabled" id='login-modal-box'>
         <div class="modal-content">
@@ -55,7 +55,7 @@
     </div>
     <div class="header__container wrapper">
         <a href="/" class="header__logo-link">
-            <img src="../static/images/logo.svg" class="header__logo" alt="">
+            <img src="../static/images/logo.svg" class="header__logo">
         </a>
         <div class="header__menu">
             <a href="{% url 'trainers' %}"

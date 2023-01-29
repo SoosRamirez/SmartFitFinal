@@ -86,55 +86,55 @@
                         </div>
                     </button>
                 </a>
-            </div>
-            <button class='button header__button' id="login-button" onclick=loginModal()>
-                <div class="button__inner">
-                    Войти
-                    <img src='../static/images/login-icon.svg' alt="" class="button__icon">
-                </div>
-            </button>
-            </div>
-        {% endif %}
-    <div class='header-mobile__button hidden' onclick="mobileOpened()" id="button-menu-mobile">
-        <div class="header-mobile__line line"></div>
-    </div>
-    <div class='header-mobile__menu hidden' id="menu-mobile">
-        <a href="{% url 'trainers' %}"
-           {% if "trainers" in request.path %}class="header__item active"
-           {% else %}class="header__item"{% endif %}>Тренеры</a>
-        <a href="{% url 'programs' %}"
-           {% if "programs" in request.path %}class="header__item active"
-           {% else %}class="header__item"{% endif %}>Программы</a>
-        <a href="{% url 'blog' %}"
-           {% if "blog" in request.path %}class="header__item active"
-           {% else %}class="header__item"{% endif %}>Блог</a>
-        <a href="{% url 'home' %}"
-           {% if request.path == 'home' %}class="header__item active"
-           {% else %}class="header__item"{% endif %}>Сообщество</a>
-        {% if user.is_authenticated %}
-            <a href="{% url 'lk' %}" class="header__profile" href="{% url 'lk' %}"
-               class="header__profile" onclick="mobileOpened()">
-                {{ request.user.username }}
-                <div class="header__avatar">{{ request.user.username.0 }}</div>
-            </a>
-        {% else %}
-            <div class="header-mobile__buttons">
-                <a href="{% url "start" %}">
-                    <button class='button header__button' id="login-button"
-                            onclick="mobileOpened()">
-                        <div class="button__inner">
-                            Тренироваться
-                            <img src='../static/images/bolt.svg' alt="" class="button__icon">
-                        </div>
-                    </button>
-                </a>
-                <button class='button _clear header__button last' onclick="mobileOpened(); loginModal()">
+                <button class='button header__button _clear' id="login-button" onclick=loginModal()>
                     <div class="button__inner">
                         Войти
+                        <img src='../static/images/login-icon.svg' alt="" class="button__icon">
                     </div>
                 </button>
             </div>
         {% endif %}
+        <div class='header-mobile__button hidden' onclick="mobileOpened()" id="button-menu-mobile">
+            <div class="header-mobile__line line"></div>
+        </div>
+        <div class='header-mobile__menu hidden' id="menu-mobile">
+            <a href="{% url 'trainers' %}"
+               {% if "trainers" in request.path %}class="header__item active"
+               {% else %}class="header__item"{% endif %}>Тренеры</a>
+            <a href="{% url 'programs' %}"
+               {% if "programs" in request.path %}class="header__item active"
+               {% else %}class="header__item"{% endif %}>Программы</a>
+            <a href="{% url 'blog' %}"
+               {% if "blog" in request.path %}class="header__item active"
+               {% else %}class="header__item"{% endif %}>Блог</a>
+            <a href="{% url 'home' %}"
+               {% if request.path == 'home' %}class="header__item active"
+               {% else %}class="header__item"{% endif %}>Сообщество</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'lk' %}" class="header__profile" href="{% url 'lk' %}"
+                   class="header__profile" onclick="mobileOpened()">
+                    {{ request.user.username }}
+                    <div class="header__avatar">{{ request.user.username.0 }}</div>
+                </a>
+            {% else %}
+                <div class="header-mobile__buttons">
+                    <a href="{% url "start" %}">
+                        <button class='button header__button' id="login-button"
+                                onclick="mobileOpened()">
+                            <div class="button__inner">
+                                Тренироваться
+                                <img src='../static/images/bolt.svg' alt="" class="button__icon">
+                            </div>
+                        </button>
+                    </a>
+                    <button class='button _clear header__button last' onclick="mobileOpened(); loginModal()">
+                        <div class="button__inner">
+                            Войти
+                        </div>
+                    </button>
+                </div>
+            {% endif %}
+        </div>
     </div>
 </header>
 <div class="purchase page">

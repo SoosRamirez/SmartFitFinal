@@ -88,7 +88,7 @@ class Trainer(models.Model):
 class WorkoutProgram(models.Model):
     name = models.CharField(max_length=30)
     preview_pic = models.ImageField()
-    main_pic = models.IntegerField()
+    main_pic = models.ImageField()
     video = models.CharField(max_length=1000)
     length = models.IntegerField(default=0)
     calories = models.IntegerField(default=0)

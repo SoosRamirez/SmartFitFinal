@@ -142,15 +142,15 @@
         <div class="trainer__inner h wrapper">
             <div class="trainer__left">
                 <p class="trainer__subtitle">Тренер</p>
-                <h1 class="trainer__title">Дмитрий Васильев</h1>
+                <h1 class="trainer__title">{{ trainer.name }}</h1>
                 <p class="trainer__info">
-                    <span>12</span>Программ
+                    <span>{{ trainer.programs }}</span>Программ
                 </p>
                 <p class="trainer__info">
-                    <span>150</span>Тренировок
+                    <span>{{ trainer.workouts }}</span>Тренировок
                 </p>
                 <p class="trainer__info">
-                    <span>15671</span>Человек занимается
+                    <span>{{ trainer.subscribers }}</span>Человек занимается
                 </p>
                 <button class='button trainer__button'>
                     <div class="button__inner">
@@ -160,7 +160,7 @@
             </div>
             <div class="trainer__frame">
                 <img src='../static/images/outline.svg' alt="" class="trainer__background"/>
-                <img src='../static/images/dmitri.png' alt="" class="trainer__image"/>
+                <img src='/media/{{ trainer.main_pic }}' alt="" class="trainer__image"/>
             </div>
             <button class='button trainer__button mobile'>
                 <div class="button__inner">
@@ -183,16 +183,7 @@
             </div>
             <div class="video__right">
                 <p class="_18 video__desc">
-                    Вы давно мечтаете похудеть, нарастить мышечную массу или
-                    сформировать красивый рельеф? С платформой SmartFit вам откроются
-                    новые возможности онлайн-фитнеса с гарантированным результатом!
-                    <br/><br/>
-                    Наша команда тренеров с многолетним опытом подготовила программы
-                    видеотренировок для различных целей: похудение, набор массы,
-                    рельеф, растяжка и многое другое.
-                    <br/><br/>
-                    Ваш результат начинается со
-                    SmartFit! Создайте тело мечты!
+                    {{ trainer.bio }}
                 </p>
             </div>
         </div>
@@ -207,29 +198,29 @@
                 <div class="carousel__inner">
                     <div class="carousel__swiper swiper-container trainer__programs">
                         <div class="swiper-wrapper">
-                            {% for i in list_programms %}
+                            {% for i in programs %}
                                 <div class="swiper-slide">
                                     <div class="program-slide">
                                         <div class="program-slide__frame"
-                                             style='background-image: url("../../media/{{ i.picture_src }}");background-size: cover; background-position: center'>
+                                             style='background-image: url("/media/{{ i.preview_pic }}");background-size: cover; background-position: center'>
                                         </div>
                                         <div class="program-slide__bottom">
-                                            <p class="program-slide__name">{name}</p>
+                                            <p class="program-slide__name">{{ i.name }}</p>
                                             <div class="program-slide__info">
                                                 <div class="program-slide__item">
                                                     <img src='../static/images/videos.svg' alt=""
                                                          class="program-slide__item-icon"/>
-                                                    {videos}
+                                                    {{ i.amount_of_workouts }}
                                                 </div>
                                                 <div class="program-slide__item">
                                                     <img src='../static/images/time.svg' alt=""
                                                          class="program-slide__item-icon"/>
-                                                    {time}
+                                                    {{ i.length }}
                                                 </div>
                                                 <div class="program-slide__item">
                                                     <img src="../static/images/calories.svg" } alt=""
                                                          class="program-slide__item-icon"/>
-                                                    {calories}
+                                                    {{ i.calories }}
                                                 </div>
                                             </div>
                                         </div>
@@ -252,28 +243,28 @@
                 <div class="carousel__inner">
                     <div class="carousel__swiper swiper-container trainer__others">
                         <div class="swiper-wrapper">
-                            {% for i in list_trainers %}
+                            {% for i in trainers %}
                                 <div class="swiper-slide">
                                     <div class="trainer-slide">
                                         <div class="trainer-slide__frame"
-                                             style='background-image: url("../../media/{{ i.picture_src }}"),'></div>
+                                             style="background-image:url('/media/{{ i.preview_pic }}')"></div>
                                         <div class="trainer-slide__info">
-                                            <p class="trainer-slide__name">{name}</p>
+                                            <p class="trainer-slide__name">{{ i.name }}</p>
                                             <div class="trainer-slide__misc">
                                                 <div class="trainer-slide__item">
                                                     <img src='../static/images/videos.svg' alt=""
                                                          class="trainer-slide__item-icon"/>
-                                                    {videos}
+                                                    {{ i.workouts }}
                                                 </div>
                                                 <div class="trainer-slide__item">
                                                     <img src='../static/images/apps.svg' alt=""
                                                          class="trainer-slide__item-icon"/>
-                                                    {programs}
+                                                    {{ i.programs }}
                                                 </div>
                                                 <div class="trainer-slide__item">
                                                     <img src='../static/images/user.svg' alt=""
                                                          class="trainer-slide__item-icon"/>
-                                                    {people}
+                                                    {{ i.subscribers }}
                                                 </div>
                                             </div>
                                         </div>
@@ -302,10 +293,10 @@
                                         <div class="swiper-slide">
                                             <div class='review-slide'>
                                                 <div class="review-slide__frame"
-                                                     style='background-image: url("../../media/{{ i.picture_src }}")'>
+                                                     style='background-image: url("/media/{{ i.image }}")'>
                                                     <div class="review-slide__info">
-                                                        <p class="review-slide__name">{name}</p>
-                                                        <p class="review-slide__text _16">{text}</p>
+                                                        <p class="review-slide__name">{{ i.name }}</p>
+                                                        <p class="review-slide__text _16">{{ i.text }}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -330,7 +321,7 @@
             </h2>
             <p class="questions__subtitle _18 center">Мы собрали самые часто задаваемые вопросы для вас</p>
             <div class="questions__box">
-                {% for i in list_questions %}
+                {% for i in questions %}
                     <div class="questions__item" onclick="handler({{ forloop.counter }}-1)">
                         <div class="questions__item-top">
                             <p class="questions__item-title">{{ i.title }}</p>

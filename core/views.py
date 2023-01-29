@@ -76,11 +76,15 @@ def subscription(request):
 
 @csrf_protect
 def logingin(request):
-    template = ''
-    context = {
-
-    }
-    return render(request, template, context)
+    email = request.POST.get('email', False)
+    password = request.POST.get('password', False)
+    user = authenticate(request, email=email, password=password)
+    if user is not None:
+        login(request, user)
+        return redirect('lk')
+    else:
+        print(user)
+        return redirect('start')
 
 
 def trainers(request):
@@ -96,6 +100,11 @@ def trainers(request):
 def trainer(request, trainer_id):
     template = 'trainer.html'
     context = {
+        'trainer': get_object_or_404(Trainer, pk=trainer_id),
+        'programs': WorkoutProgram.objects.filter(trainer_id=trainer_id),
+        'trainers': Trainer.objects.all(),
+        'reviews': Feedback.objects.all(),
+        'questions': Question.objects.all(),
 
     }
     return render(request, template, context)
@@ -117,8 +126,12 @@ def programs(request):
 
 def program(request, program_id):
     template = 'program.html'
+    get_program = get_object_or_404(WorkoutProgram, pk=program_id)
     context = {
-
+        'program': get_program,
+        'other': WorkoutProgram.objects.filter(trainer_id=get_program.trainer_id),
+        'reviews': Feedback.objects.all(),
+        'questions': Question.objects.all(),
     }
     return render(request, template, context)
 

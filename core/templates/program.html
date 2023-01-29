@@ -538,4 +538,19 @@
         }
     }
 </script>
+<script type="module">
+    import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.esm.browser.min.js'
+
+    var galleryTop = new Swiper('.reviews', {
+        centeredSlides: false,
+        loop: false,
+        slidesPerView: "auto",
+        spaceBetween: 40,
+        navigation: {
+            nextEl: `.reviews__next`,
+            prevEl: `.reviews__prev`,
+        },
+    });
+
+</script>
 </html>

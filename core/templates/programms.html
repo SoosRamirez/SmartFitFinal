@@ -164,7 +164,7 @@
                                     <div class="swiper-slide">
                                         <div class="program-slide program-slide_trend {{ i.directions.id }}">
                                             <div class="program-slide__frame"
-                                                 style='background-image:url("/media/{{ i.picture_src }}");background-size:cover;background-position:center'>
+                                                 style='background-image:url("/media/{{ i.preview_pic }}");background-size:cover;background-position:center'>
                                             </div>
                                             <div class="program-slide__bottom">
                                                 <p class="program-slide__name">{{ i.name }}</p>
@@ -211,25 +211,25 @@
                                     <div class="swiper-slide">
                                         <div class="program-slide">
                                             <div class="program-slide__frame"
-                                                 style='background-image:url("/media/{{ i.picture_src }}");background-size: cover;background-position: center'>
+                                                 style='background-image:url("/media/{{ i.preview_pic }}");background-size: cover;background-position: center'>
                                             </div>
                                             <div class="program-slide__bottom">
-                                                <p class="program-slide__name">{name}</p>
+                                                <p class="program-slide__name">{{ i.name }}</p>
                                                 <div class="program-slide__info">
                                                     <div class="program-slide__item">
                                                         <img src='../static/images/videos.svg' alt=""
                                                              class="program-slide__item-icon"/>
-                                                        {videos}
+                                                        {{ i.amount_of_workouts }}
                                                     </div>
                                                     <div class="program-slide__item">
                                                         <img src='../static/images/time.svg' alt=""
                                                              class="program-slide__item-icon"/>
-                                                        {time}
+                                                        {{ i.length }}
                                                     </div>
                                                     <div class="program-slide__item">
                                                         <img src="../static/images/calories.svg" alt=""
                                                              class="program-slide__item-icon"/>
-                                                        {calories}
+                                                        {{ i.calories }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -258,25 +258,25 @@
                                     <div class="swiper-slide">
                                         <div class="program-slide">
                                             <div class="program-slide__frame"
-                                                 style='background-image:url("/media/{{ i.picture_src }}");background-size: cover;background-position: center'>
+                                                 style='background-image:url("/media/{{ i.preview_pic }}");background-size: cover;background-position: center'>
                                             </div>
                                             <div class="program-slide__bottom">
-                                                <p class="program-slide__name">{name}</p>
+                                                <p class="program-slide__name">{{ i.name }}</p>
                                                 <div class="program-slide__info">
                                                     <div class="program-slide__item">
                                                         <img src='../static/images/videos.svg' alt=""
                                                              class="program-slide__item-icon"/>
-                                                        {videos}
+                                                        {{ i.amount_of_workouts }}
                                                     </div>
                                                     <div class="program-slide__item">
                                                         <img src='../static/images/time.svg' alt=""
                                                              class="program-slide__item-icon"/>
-                                                        {time}
+                                                        {{ i.length }}
                                                     </div>
                                                     <div class="program-slide__item">
                                                         <img src="../static/images/calories.svg" alt=""
                                                              class="program-slide__item-icon"/>
-                                                        {calories}
+                                                        {{ i.calories }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -309,7 +309,7 @@
                 <a href="{% url 'program' i.id %}">
                     <div class="program-slide program-slide_all {{ i.directions.id }}">
                         <div class="program-slide__frame"
-                             style="background-image:url('/media/{{ i.picture_src }}'); background-size:cover; background-position:center ">
+                             style="background-image:url('/media/{{ i.preview_pic }}'); background-size:cover; background-position:center ">
                         </div>
                         <div class="program-slide__bottom">
                             <p class="program-slide__name">{{ i.name }}</p>
@@ -349,10 +349,10 @@
                                         <div class="swiper-slide">
                                             <div class='review-slide'>
                                                 <div class="review-slide__frame"
-                                                     style='background-image: url("/media/{{ i.picture_src }}")'>
+                                                     style='background-image: url("/media/{{ i.image }}")'>
                                                     <div class="review-slide__info">
-                                                        <p class="review-slide__name">{name}</p>
-                                                        <p class="review-slide__text _16">{text}</p>
+                                                        <p class="review-slide__name">{{ i.name }}</p>
+                                                        <p class="review-slide__text _16">{{ i.text }}</p>
                                                     </div>
                                                 </div>
                                             </div>

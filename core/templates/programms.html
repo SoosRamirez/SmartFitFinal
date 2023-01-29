@@ -159,12 +159,12 @@
                 <div class="carousel__inner  ">
                     <div class="carousel__swiper swiper-container programs-slider_trg">
                         <div class="swiper-wrapper">
-                            {% for i in list_programs %}
-                                <div class="swiper-slide">
-                                    <div class="program-slide program-slide_trend {{ i.directions.id }}">
-                                        <a href="{% url 'program' i.id %}">
+                            {% for i in all %}
+                                <a href="{% url 'program' i.id %}">
+                                    <div class="swiper-slide">
+                                        <div class="program-slide program-slide_trend {{ i.directions.id }}">
                                             <div class="program-slide__frame"
-                                                 style='background-image:url("../../media/{{ i.picture_src }}");background-size:cover;background-position:center'>
+                                                 style='background-image:url("/media/{{ i.picture_src }}");background-size:cover;background-position:center'>
                                             </div>
                                             <div class="program-slide__bottom">
                                                 <p class="program-slide__name">{{ i.name }}</p>
@@ -186,9 +186,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </a>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             {% endfor %}
                         </div>
                     </div>
@@ -206,39 +206,41 @@
                 <div class="carousel__inner">
                     <div class="carousel__swiper swiper-container programs__carousel-new">
                         <div class="swiper-wrapper">
-                            {% for i in list_new %}
-                                <div class="swiper-slide">
-                                    <div class="program-slide">
-                                        <div class="program-slide__frame"
-                                             style='background-image:url("../../media/{{ i.picture_src }}");background-size: cover;background-position: center'>
-                                        </div>
-                                        <div class="program-slide__bottom">
-                                            <p class="program-slide__name">{name}</p>
-                                            <div class="program-slide__info">
-                                                <div class="program-slide__item">
-                                                    <img src='../static/images/videos.svg' alt=""
-                                                         class="program-slide__item-icon"/>
-                                                    {videos}
-                                                </div>
-                                                <div class="program-slide__item">
-                                                    <img src='../static/images/time.svg' alt=""
-                                                         class="program-slide__item-icon"/>
-                                                    {time}
-                                                </div>
-                                                <div class="program-slide__item">
-                                                    <img src="../static/images/calories.svg" alt=""
-                                                         class="program-slide__item-icon"/>
-                                                    {calories}
+                            {% for i in new %}
+                                <a href="{% url 'program' i.id %}">
+                                    <div class="swiper-slide">
+                                        <div class="program-slide">
+                                            <div class="program-slide__frame"
+                                                 style='background-image:url("/media/{{ i.picture_src }}");background-size: cover;background-position: center'>
+                                            </div>
+                                            <div class="program-slide__bottom">
+                                                <p class="program-slide__name">{name}</p>
+                                                <div class="program-slide__info">
+                                                    <div class="program-slide__item">
+                                                        <img src='../static/images/videos.svg' alt=""
+                                                             class="program-slide__item-icon"/>
+                                                        {videos}
+                                                    </div>
+                                                    <div class="program-slide__item">
+                                                        <img src='../static/images/time.svg' alt=""
+                                                             class="program-slide__item-icon"/>
+                                                        {time}
+                                                    </div>
+                                                    <div class="program-slide__item">
+                                                        <img src="../static/images/calories.svg" alt=""
+                                                             class="program-slide__item-icon"/>
+                                                        {calories}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             {% endfor %}
                         </div>
                     </div>
                 </div>
-            {% if request.user_agent.is_mobile %}
+                {% if request.user_agent.is_mobile %}
                 {% else %}
                     <div class='carousel__arrow-prev carouser__arrow programs__carousel-new__prev absolute'></div>
                     <div class='carousel__arrow-next carouser__arrow programs__carousel-new__next absolute'></div>
@@ -251,39 +253,41 @@
                 <div class="carousel__inner">
                     <div class="carousel__swiper swiper-container programs__carousel-popular">
                         <div class="swiper-wrapper">
-                            {% for i in programms %}
-                                <div class="swiper-slide">
-                                    <div class="program-slide">
-                                        <div class="program-slide__frame"
-                                             style='background-image:url("../../media/{{ i.picture_src }}");background-size: cover;background-position: center'>
-                                        </div>
-                                        <div class="program-slide__bottom">
-                                            <p class="program-slide__name">{name}</p>
-                                            <div class="program-slide__info">
-                                                <div class="program-slide__item">
-                                                    <img src='../static/images/videos.svg' alt=""
-                                                         class="program-slide__item-icon"/>
-                                                    {videos}
-                                                </div>
-                                                <div class="program-slide__item">
-                                                    <img src='../static/images/time.svg' alt=""
-                                                         class="program-slide__item-icon"/>
-                                                    {time}
-                                                </div>
-                                                <div class="program-slide__item">
-                                                    <img src="../static/images/calories.svg" alt=""
-                                                         class="program-slide__item-icon"/>
-                                                    {calories}
+                            {% for i in pop %}
+                                <a href="{% url 'program' i.id %}">
+                                    <div class="swiper-slide">
+                                        <div class="program-slide">
+                                            <div class="program-slide__frame"
+                                                 style='background-image:url("/media/{{ i.picture_src }}");background-size: cover;background-position: center'>
+                                            </div>
+                                            <div class="program-slide__bottom">
+                                                <p class="program-slide__name">{name}</p>
+                                                <div class="program-slide__info">
+                                                    <div class="program-slide__item">
+                                                        <img src='../static/images/videos.svg' alt=""
+                                                             class="program-slide__item-icon"/>
+                                                        {videos}
+                                                    </div>
+                                                    <div class="program-slide__item">
+                                                        <img src='../static/images/time.svg' alt=""
+                                                             class="program-slide__item-icon"/>
+                                                        {time}
+                                                    </div>
+                                                    <div class="program-slide__item">
+                                                        <img src="../static/images/calories.svg" alt=""
+                                                             class="program-slide__item-icon"/>
+                                                        {calories}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             {% endfor %}
                         </div>
                     </div>
                 </div>
-            {% if request.user_agent.is_mobile %}
+                {% if request.user_agent.is_mobile %}
                 {% else %}
                     <div class='carousel__arrow-prev carouser__arrow programs__carousel-popular__prev absolute'></div>
                     <div class='carousel__arrow-next carouser__arrow programs__carousel-popular__next absolute'></div>
@@ -301,11 +305,11 @@
             {% endfor %}
         </div>
         <div class="programs__box">
-            {% for i in list_programs %}
-                <div class="program-slide program-slide_all {{ i.directions.id }}">
-                    <a href="{% url 'program' i.id %}">
+            {% for i in all %}
+                <a href="{% url 'program' i.id %}">
+                    <div class="program-slide program-slide_all {{ i.directions.id }}">
                         <div class="program-slide__frame"
-                             style="background-image:url('../../media/{{ i.picture_src }}'); background-size:cover; background-position:center ">
+                             style="background-image:url('/media/{{ i.picture_src }}'); background-size:cover; background-position:center ">
                         </div>
                         <div class="program-slide__bottom">
                             <p class="program-slide__name">{{ i.name }}</p>
@@ -324,8 +328,8 @@
                                 </div>
                             </div>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
             {% endfor %}
         </div>
     </div>
@@ -345,7 +349,7 @@
                                         <div class="swiper-slide">
                                             <div class='review-slide'>
                                                 <div class="review-slide__frame"
-                                                     style='background-image: url("../../media/{{ i.picture_src }}")'>
+                                                     style='background-image: url("/media/{{ i.picture_src }}")'>
                                                     <div class="review-slide__info">
                                                         <p class="review-slide__name">{name}</p>
                                                         <p class="review-slide__text _16">{text}</p>
@@ -373,7 +377,7 @@
             </h2>
             <p class="questions__subtitle _18 center">Мы собрали самые часто задаваемые вопросы для вас</p>
             <div class="questions__box">
-                {% for i in list_questions %}
+                {% for i in questions %}
                     <div class="questions__item" onclick="handler({{ forloop.counter }}-1)">
                         <div class="questions__item-top">
                             <p class="questions__item-title">{{ i.title }}</p>
@@ -527,5 +531,65 @@
             }
         }
     }
+</script>
+<script type="module">
+    import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.esm.browser.min.js'
+
+    var galleryTop = new Swiper('.reviews', {
+        centeredSlides: false,
+        loop: false,
+        slidesPerView: "auto",
+        spaceBetween: 40,
+        navigation: {
+            nextEl: `.reviews__next`,
+            prevEl: `.reviews__prev`,
+        },
+    });
+
+</script>
+<script type="module">
+    import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.esm.browser.min.js'
+
+    var galleryTop = new Swiper('.programs__carousel-first', {
+        centeredSlides: false,
+        loop: false,
+        slidesPerView: "auto",
+        spaceBetween: 40,
+        navigation: {
+            nextEl: `.programs__carousel-first__next`,
+            prevEl: `.programs__carousel-first__prev`,
+        },
+    });
+
+</script>
+<script type="module">
+    import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.esm.browser.min.js'
+
+    var galleryTop = new Swiper('.programs__carousel-new', {
+        centeredSlides: false,
+        loop: false,
+        slidesPerView: "auto",
+        spaceBetween: 40,
+        navigation: {
+            nextEl: `.programs__carousel-new__next`,
+            prevEl: `.programs__carousel-new__prev`,
+        },
+    });
+
+</script>
+<script type="module">
+    import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.esm.browser.min.js'
+
+    var galleryTop = new Swiper('.programs__carousel-popular', {
+        centeredSlides: false,
+        loop: false,
+        slidesPerView: "auto",
+        spaceBetween: 40,
+        navigation: {
+            nextEl: `.programs__carousel-popular__next`,
+            prevEl: `.programs__carousel-popular__prev`,
+        },
+    });
+
 </script>
 </html>

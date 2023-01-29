@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_protect
 
 from core.forms import CommentForm
-from core.models import BlogPost, BlogComment
+from core.models import BlogPost, BlogComment, Trainer, Direction, Trend, WorkoutProgram, Feedback, Question
 
 
 @login_required
@@ -86,7 +86,9 @@ def logingin(request):
 def trainers(request):
     template = 'trainers.html'
     context = {
-
+        'popular': Trainer.objects.order_by('subscribers')[:10],
+        'all': Trainer.objects.all(),
+        'directions': Direction.objects.all(),
     }
     return render(request, template, context)
 
@@ -102,7 +104,13 @@ def trainer(request, trainer_id):
 def programs(request):
     template = 'programms.html'
     context = {
-
+        'trend': Trend.objects.all(),
+        'all': WorkoutProgram.objects.all(),
+        'new': WorkoutProgram.objects.order_by('-pub_date')[:10],
+        "pop": WorkoutProgram.objects.order_by('subscribers')[:10],
+        'directions': Direction.objects.all(),
+        'reviews': Feedback.objects.all(),
+        'questions': Question.objects.all(),
     }
     return render(request, template, context)
 

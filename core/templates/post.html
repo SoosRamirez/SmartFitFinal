@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../static/css/SF_lk.css">
     <link rel="stylesheet" href="../static/css/modal.css">
     <link rel="stylesheet" href="../static/css/new.css">
+    <link rel="stylesheet" href="../static/css/post.css">
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon">
 </head>
@@ -141,29 +142,17 @@
 <div class="post-page page">
     <div class="post-page__wrapper wrapper">
         <h1 class="post-page__title title">
-            Топ-5 рецептов для снижения веса в домашних условиях
+            {{ post.name }}
         </h1>
         <div class="post-page__info">
-            {
-            "22.09.2023" // дата
-            }
+            {{ post.pub_date }}
             <div class="post-page__dot"></div>
-            {
-            "Время прочтения 5 минут" // время прочтения
-            }
+            Время прочтения {{ post.read_time }} минут
         </div>
         <div class="post-page__content">
-            <img src='../static/images/blog-example.png' alt="" class="post-page__image"/>
+            <img src='/media/{{ post.main_pic }}' alt="" class="post-page__image"/>
             <p class="post-page__paragraph">
-                Любишь завтракать на ходу или вовсе обходишься чашечкой кофе с утра?
-                А ведь именно завтрак задает настрой на весь день. <br/>
-                <br/>
-                Посвяти 15 минут вкусному полезному завтраку и ты почувствуешь
-                прилив сил и бодрости, а ранний подъем не будет казаться таким уж и
-                ранним. <br/>
-                <br/>
-                Мы подобрали для тебя 5 самых полезных рецептов на завтрак, которые
-                насытят организм энергией и удержат тебя от частых перекусов.
+                {{ post.text }}
             </p>
             <h2 class="post-page__subtitle">Ленивая овсянка в банке</h2>
             <p class="post-page__paragraph">
@@ -179,32 +168,41 @@
             </p>
         </div>
         <div class="post-page__form">
-            <h1 class="post-page__title title form-title">Отзывы о статье</h1>
-            <div class="post-page__form-top">
-                <label class="text-field__label">
-                    Ваше имя
-                    <div class="text-field__box">
-                        <input type="text" class='text-field' placeholder="Имя">
-                    </div>
-                </label>
-                <label class="text-field__label">
-                    Ваша почта
-                    <div class="text-field__box">
-                        <input type="text" class='text-field' placeholder=Почта">
-                    </div>
-                </label>
-            </div>
-            <label class="text-field__label">
-                Ваш отзыв
-                <div class="text-field__box">
-                    <textarea class='text-field__area text-field' placeholder="Текст отзыва"></textarea>
+            <form action="{% url 'post' post.id %}" method="post" id="comment">{% csrf_token %}
+                <h1 class="post-page__title title form-title">Отзывы о статье</h1>
+                <div class="post-page__form-top">
+                    <label class="text-field__label">
+                        Ваше имя
+                        <div class="text-field__box">
+                            <input type="text" class='text-field' placeholder="Имя" name="name">
+                        </div>
+                    </label>
+                    <label class="text-field__label">
+                        Ваша почта
+                        <div class="text-field__box">
+                            <input type="text" class='text-field' placeholder="Почта" name="email">
+                        </div>
+                    </label>
                 </div>
-            </label>
+                <label class="text-field__label">
+                    Ваш отзыв
+                    <div class="text-field__box">
+                        <textarea class='text-field__area text-field' placeholder="Текст отзыва" name="text"></textarea>
+                    </div>
+                </label>
+                <input type="hidden" value="{{ post.id }}" name="post">
+                <button class='button ' type="submit" form="comment">
+                    <div class="button__inner">
+                        оставить комментарий
+                        <img src='../static/images/bolt.svg' alt="" class="button__icon">
+                    </div>
+                </button>
+            </form>
         </div>
         <div class="post-page__comments">
             <div class="comment">
                 <div class="comment__top">
-                    <img src='../static/images/comment-avatar.png' alt="" class="comment__image"/>
+                    <img src=' ../static/images/comment-avatar.png' alt="" class="comment__image"/>
                     <div class="comment__misc">
                         <p class="comment__name">Дмитрий</p>
                         <p class="comment__time">3 месяца назад</p>
@@ -215,6 +213,20 @@
                     всем рекомендую попробовать хотя бы раз.
                 </div>
             </div>
+            {% for comm in comments %}
+                <div class="comment">
+                    <div class="comment__top">
+                        <img src='../static/images/comment-avatar.png' alt="" class="comment__image"/>
+                        <div class="comment__misc">
+                            <p class="comment__name">{{ comm.name }}</p>
+                            <p class="comment__time">3 месяца назад</p>
+                        </div>
+                    </div>
+                    <div class="comment__text">
+                        {{ comm.text }}
+                    </div>
+                </div>
+            {% endfor %}
             <Comment/>
             <Comment/>
             <Comment/>
@@ -234,20 +246,20 @@
                     <div class="carousel__inner">
                         <div class="carousel__swiper swiper-container post-page__slider">
                             <div class="swiper-wrapper">
-                                {% for i in list %}
+                                {% for other in other_posts %}
                                     <div class="swiper-slide">
                                         <div class='blog-slide post-page__slide'>
                                             <div class="blog-slide__frame"
-                                                 style='background-image: url("../../media/{{ i.src_pic }}")'></div>
+                                                 style='background-image: url("/media/{{ other.preview_pic }}")'></div>
                                             <div class="blog-slide__info">
-                                                <p class="blog-slide__title">{title}</p>
+                                                <p class="blog-slide__title">{{ other.name }}</p>
                                                 <div class="blog-slide__misc">
-                                                    <p class="blog-slide__date">{date}</p>
+                                                    <p class="blog-slide__date">{{ other.pub_date }}</p>
                                                     <p class="blog-slide__time"></p>
                                                     <p class="blog-slide__likes">
                                                         <img src='../static/images/like.svg' alt=""
                                                              class="blog-slide__heart"/>
-                                                        {likes}
+                                                        {{ other.likes }}
                                                     </p>
                                                 </div>
                                             </div>

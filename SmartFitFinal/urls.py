@@ -14,7 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf.urls.static import static
 from django.urls import path
+
+from SmartFitFinal import settings
 from core import views
 
 urlpatterns = [
@@ -35,4 +38,6 @@ urlpatterns = [
     path('trainers/<int:trainer_id>', views.trainer, name='trainer'),
     path('programs/<int:program_id>', views.program, name='program'),
     path('subscribe/<int:program_id>', views.subscribe, name='subscribe'),
-]
+    path('blog/<int:post_id>', views.blogpost, name='post'),
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

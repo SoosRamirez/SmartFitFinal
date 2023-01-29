@@ -144,20 +144,25 @@
         </h2>
         <p class="_18 blog__subtitle center">Начните лучше понимать своё тело</p>
         <div class="blog__box">
-            <div class='blog-slide blog__slide'>
-                <div class="blog-slide__frame" style='background-image: url("../../media/{{ i.picture_src }}")'></div>
-                <div class="blog-slide__info">
-                    <p class="blog-slide__title">{title}</p>
-                    <div class="blog-slide__misc">
-                        <p class="blog-slide__date">{date}</p>
-                        <p class="blog-slide__time"></p>
-                        <p class="blog-slide__likes">
-                            <img src='../static/images/like.svg' alt="" class="blog-slide__heart">
-                            {likes}
-                        </p>
+            {% for post in posts %}
+                <a href="{% url 'post' post.id %}">
+                    <div class='blog-slide blog__slide'>
+                        <div class="blog-slide__frame"
+                             style='background-image: url("/media/{{ post.preview_pic }}")'></div>
+                        <div class="blog-slide__info">
+                            <p class="blog-slide__title">{{ post.name }}</p>
+                            <div class="blog-slide__misc">
+                                <p class="blog-slide__date">{{ post.pub_date }}</p>
+                                <p class="blog-slide__time"></p>
+                                <p class="blog-slide__likes">
+                                    <img src='../static/images/like.svg' alt="" class="blog-slide__heart">
+                                    {{ post.likes }}
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </a>
+            {% endfor %}
         </div>
     </div>
 </div>
@@ -238,18 +243,6 @@
         const mobileMenu = document.getElementById('menu-mobile')
         mobileMenu.classList.toggle('hidden')
         mobileMenu.classList.toggle('opened')
-    }
-    const crosses = document.querySelectorAll(".questions__item-button")
-    const questions = document.querySelectorAll(".questions__item-body")
-    const handler = (index) => {
-        for (let j = 0; j < crosses.length; j++) {
-            if (crosses[j] !== crosses[index]) {
-                crosses[j].classList.remove("_opened")
-                questions[j].classList.remove("_opened")
-            }
-            crosses[index].classList.toggle("_opened")
-            questions[index].classList.toggle("_opened")
-        }
     }
     const loginModal = () => {
         const loginModal = document.getElementById('login-modal-box')

@@ -1,9 +1,10 @@
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_protect
 
-from core.models import BlogPost
+from core.forms import CommentForm
+from core.models import BlogPost, BlogComment
 
 
 @login_required
@@ -122,11 +123,18 @@ def blog(request):
     return render(request, template, context)
 
 
+@csrf_protect
 def blogpost(request, post_id):
     template = 'post.html'
     context = {
-
+        'post': get_object_or_404(BlogPost, pk=post_id),
+        'comments': BlogComment.objects.filter(post=post_id),
+        'other_posts': BlogPost.objects.order_by('likes')
     }
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
     return render(request, template, context)
 
 

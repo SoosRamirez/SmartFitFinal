@@ -389,18 +389,6 @@
         mobileMenu.classList.toggle('hidden')
         mobileMenu.classList.toggle('opened')
     }
-    const crosses = document.querySelectorAll(".questions__item-button")
-    const questions = document.querySelectorAll(".questions__item-body")
-    const handler = (index) => {
-        for (let j = 0; j < crosses.length; j++) {
-            if (crosses[j] !== crosses[index]) {
-                crosses[j].classList.remove("_opened")
-                questions[j].classList.remove("_opened")
-            }
-            crosses[index].classList.toggle("_opened")
-            questions[index].classList.toggle("_opened")
-        }
-    }
     const loginModal = () => {
         const loginModal = document.getElementById('login-modal-box')
         const loginBackground = document.getElementById("login-modal-background")

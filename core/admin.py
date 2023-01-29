@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from core.models import Trend, Trainer, Workout, BlogPost, Direction, Feedback, WorkoutProgram, \
-    PersonalInfo, Progress, Question, Subscription, Payment
+    PersonalInfo, Progress, Question, Subscription, Payment, BlogComment
 
 admin.site.register(Trend)
 admin.site.register(Trainer)
@@ -15,3 +15,4 @@ admin.site.register(Progress)
 admin.site.register(Question)
 admin.site.register(Subscription)
 admin.site.register(Payment)
+admin.site.register(BlogComment)

@@ -52,6 +52,13 @@ class BlogPost(models.Model):
         verbose_name = 'Блог'
 
 
+class BlogComment(models.Model):
+    name = models.CharField(max_length=50)
+    text = models.TextField()
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE)
+    email = models.CharField(max_length=50)
+
+
 class Feedback(models.Model):
     name = models.CharField(max_length=30)
     text = models.TextField()

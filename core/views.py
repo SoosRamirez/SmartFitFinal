@@ -4,7 +4,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_protect
 
 from core.forms import CommentForm
-from core.models import BlogPost, BlogComment, Trainer, Direction, Trend, WorkoutProgram, Feedback, Question
+from core.models import BlogPost, BlogComment, Trainer, Direction, Trend, WorkoutProgram, Feedback, Question, Workout, \
+    Subscription
 
 
 @login_required
@@ -129,6 +130,7 @@ def program(request, program_id):
     get_program = get_object_or_404(WorkoutProgram, pk=program_id)
     context = {
         'program': get_program,
+        'workouts': Workout.objects.filter(program_id=program_id),
         'other': WorkoutProgram.objects.filter(trainer_id=get_program.trainer_id),
         'reviews': Feedback.objects.all(),
         'questions': Question.objects.all(),
@@ -160,11 +162,15 @@ def blogpost(request, post_id):
 
 
 def subscribe(request, program_id):
-    template = ''
-    context = {
-
-    }
-    return render(request, template, context)
+    subscriptions = Subscription.objects.all()
+    for sub in subscriptions:
+        print('sub')
+        if sub.program.id == program_id and sub.user_id == request.user.id:
+            return redirect('program', program_id)
+        else:
+            print(sub.program.id, sub.user_id)
+            Subscription.objects.create(user_id=request.user.id, program_id=program_id, workout_stopped=0)
+    return redirect('program', program_id)
 
 
 @csrf_protect

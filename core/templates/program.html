@@ -145,23 +145,25 @@
                 <p class="trainer__subtitle">Программа</p>
                 <h1 class="trainer__title">СТАЛЬНОЙ ПРЕСС</h1>
                 <p class="trainer__info">
-                    <span>12</span> Тренировок в программе
+                    <span>{{ workouts|length }}</span> Тренировок в программе
                 </p>
                 <p class="trainer__info">
-                    <span>150</span>Минут длится одна тренировка
+                    <span>{{ program.length }}</span>Минут длится одна тренировка
                 </p>
                 <p class="trainer__info">
-                    <span>15671</span>Калорий сжигается за тренировку
+                    <span>{{ program.calories }}</span>Калорий сжигается за тренировку
                 </p>
-                <button class='button trainer__button'>
-                    <div class="button__inner">начать тренировку
-                        <img src='../static/images/bolt.svg' alt="" class="button__icon">
-                    </div>
-                </button>
+                <form action="{% url 'subscribe' program.id %}">
+                    <button class='button trainer__button' type="submit">
+                        <div class="button__inner">начать тренировку
+                            <img src='../static/images/bolt.svg' alt="" class="button__icon">
+                        </div>
+                    </button>
+                </form>
             </div>
             <div class="trainer__frame">
                 <img src='../static/images/outline.svg' alt="" class="trainer__background"/>
-                <img src='../static/images/dmitri.png' alt="" class="trainer__image"/>
+                <img src='/media/{{ program.trainer.main_pic }}' alt="" class="trainer__image"/>
             </div>
             <button class='button trainer__button mobile'>
                 <div class="button__inner">начать тренировку
@@ -178,19 +180,17 @@
             <div class="video__right">
                 <h2 class="video__title program__title">О программе</h2>
                 <p class="_18 video__desc">
-                    Тебя ждет 30 тренировок и 6 уровней сложности – с каждым уровнем нарастает сложность и интенсивность
-                    тренировок! Ты будешь наглядно видеть свой прогресс!
-                    Начни новую жизнь уже сегодня, с улыбкой на лице – вместе с Дмитрием Васильевым.
+                    {{ program.description }}
                 </p>
                 <div class="program__items">
-                    <div class="program__item"><span>30</span>
+                    <div class="program__item"><span>{{ workouts|length }}</span>
                         Тренировок <br/>
                         в программе
                     </div>
-                    <div class="program__item"><span>30</span>
+                    <div class="program__item"><span>{{ program.length }}</span>
                         Минут длится <br/> одна тренировка
                     </div>
-                    <div class="program__item"><span>30</span>
+                    <div class="program__item"><span>{{ program.calories }}</span>
                         Калорий сжигается <br/> за тренировку
                     </div>
                 </div>
@@ -199,101 +199,19 @@
         <div class='scrolling program__scrolling'>
             <input type="range" class="scrolling__bar" value="0" id='scrolling__bar' itemref='scrollRef' step="1">
             <div class="scrolling__content" itemref="containerRef" id='scrolling__content'>
-                <div class="scrolling__item">
-                    <p class="scrolling__number">1/30</p>
-                    <div class="scrolling__frame" style="background-image:url('/media/IMG_3553.jpg')">
-                        <p class="scrolling__time">29.18</p>
-                        <img src="../static/images/rewind.svg" alt="" class="scrolling__icon">
+                {% for i in workouts %}
+                    <div class="scrolling__item">
+                        <p class="scrolling__number">{{ forloop.counter }}/{{ workouts|length }}</p>
+                        <div class="scrolling__frame" style="background-image:url('/media/{{ i.picture_src }}')">
+                            <p class="scrolling__time">{{ i.pub_date }}</p>
+                            <img src="../static/images/rewind.svg" alt="" class="scrolling__icon">
+                        </div>
+                        <p class="scrolling__burn">
+                            <img src="../static/images/fire.svg" alt="" class="scrolling__fire"/>
+                            {{ i.calories }} ккал
+                        </p>
                     </div>
-                    <p class="scrolling__burn">
-                        <img src="../static/images/fire.svg" alt="" class="scrolling__fire"/>
-                        520 ккал
-                    </p>
-                </div>
-                <div class="scrolling__item">
-                    <p class="scrolling__number">1/30</p>
-                    <div class="scrolling__frame"
-                         style="background-image:url('/media/IMG_3553.jpg')">
-                        <p class="scrolling__time">29.18</p>
-                        <img src="../static/images/rewind.svg" alt="" class="scrolling__icon"/>
-                    </div>
-                    <p class="scrolling__burn">
-                        <img src="../static/images/fire.svg" alt="" class="scrolling__fire"/>
-                        520 ккал
-                    </p>
-                </div>
-                <div class="scrolling__item">
-                    <p class="scrolling__number">1/30</p>
-                    <div class="scrolling__frame"
-                         style="background-image:url('/media/IMG_3553.jpg')">
-                        <p class="scrolling__time">29.18</p>
-                        <img src="../static/images/rewind.svg" alt="" class="scrolling__icon"/>
-                    </div>
-                    <p class="scrolling__burn">
-                        <img src="../static/images/fire.svg" alt="" class="scrolling__fire"/>
-                        520 ккал
-                    </p>
-                </div>
-                <div class="scrolling__item">
-                    <p class="scrolling__number">1/30</p>
-                    <div class="scrolling__frame"
-                         style="background-image:url('/media/IMG_3553.jpg')">
-                        <p class="scrolling__time">29.18</p>
-                        <img src="../static/images/rewind.svg" alt="" class="scrolling__icon"/>
-                    </div>
-                    <p class="scrolling__burn">
-                        <img src="../static/images/fire.svg" alt="" class="scrolling__fire"/>
-                        520 ккал
-                    </p>
-                </div>
-                <div class="scrolling__item">
-                    <p class="scrolling__number">1/30</p>
-                    <div class="scrolling__frame"
-                         style="background-image:url('/media/IMG_3553.jpg')">
-                        <p class="scrolling__time">29.18</p>
-                        <img src="../static/images/rewind.svg" alt="" class="scrolling__icon"/>
-                    </div>
-                    <p class="scrolling__burn">
-                        <img src="../static/images/fire.svg" alt="" class="scrolling__fire"/>
-                        520 ккал
-                    </p>
-                </div>
-                <div class="scrolling__item">
-                    <p class="scrolling__number">1/30</p>
-                    <div class="scrolling__frame"
-                         style="background-image:url('/media/IMG_3553.jpg')">
-                        <p class="scrolling__time">29.18</p>
-                        <img src="../static/images/rewind.svg" alt="" class="scrolling__icon"/>
-                    </div>
-                    <p class="scrolling__burn">
-                        <img src="../static/images/fire.svg" alt="" class="scrolling__fire"/>
-                        520 ккал
-                    </p>
-                </div>
-                <div class="scrolling__item">
-                    <p class="scrolling__number">1/30</p>
-                    <div class="scrolling__frame"
-                         style="background-image:url('/media/IMG_3553.jpg')">
-                        <p class="scrolling__time">29.18</p>
-                        <img src="../static/images/rewind.svg" alt="" class="scrolling__icon"/>
-                    </div>
-                    <p class="scrolling__burn">
-                        <img src="../static/images/fire.svg" alt="" class="scrolling__fire"/>
-                        520 ккал
-                    </p>
-                </div>
-                <div class="scrolling__item">
-                    <p class="scrolling__number">1/30</p>
-                    <div class="scrolling__frame"
-                         style="background-image:url('../../media/IMG_3553.jpg')">
-                        <p class="scrolling__time">29.18</p>
-                        <img src="../static/images/rewind.svg" alt="" class="scrolling__icon"/>
-                    </div>
-                    <p class="scrolling__burn">
-                        <img src="../static/images/fire.svg" alt="" class="scrolling__fire"/>
-                        520 ккал
-                    </p>
-                </div>
+                {% endfor %}
             </div>
         </div>
         <h2 class="center trainer__h2 m">О <span class="underline">тренере</span></h2>
@@ -307,16 +225,7 @@
             </div>
             <div class="video__right">
                 <p class="_18 video__desc">
-                    Вы давно мечтаете похудеть, нарастить мышечную массу или
-                    сформировать красивый рельеф? С платформой SmartFit вам откроются
-                    новые возможности онлайн-фитнеса с гарантированным результатом!
-                    <br/><br/>
-                    Наша команда тренеров с многолетним опытом подготовила программы
-                    видеотренировок для различных целей: похудение, набор массы,
-                    рельеф, растяжка и многое другое.
-                    <br/><br/>
-                    Ваш результат начинается со
-                    SmartFit! Создайте тело мечты!
+                    {{ program.trainer.bio }}
                 </p>
             </div>
         </div>
@@ -331,29 +240,29 @@
                 <div class="carousel__inner">
                     <div class="carousel__swiper swiper-container trainer__others">
                         <div class="swiper-wrapper">
-                            {% for i in list_trainers %}
+                            {% for i in other %}
                                 <div class="swiper-slide">
                                     <div class="program-slide">
                                         <div class="program-slide__frame"
-                                             style='background-image: url("../../media/{{ i.picture_src }}");background-size: cover;background-position: center;'>
+                                             style='background-image: url("/media/{{ i.preview_pic }}");background-size: cover;background-position: center;'>
                                         </div>
                                         <div class="program-slide__bottom">
-                                            <p class="program-slide__name">{name}</p>
+                                            <p class="program-slide__name">{{ i.name }}</p>
                                             <div class="program-slide__info">
                                                 <div class="program-slide__item">
                                                     <img src='../static/images/videos.svg' alt=""
                                                          class="program-slide__item-icon"/>
-                                                    {videos}
+                                                    {{ program.amount_of_workouts }}
                                                 </div>
                                                 <div class="program-slide__item">
                                                     <img src="../static/images/time.svg" alt=""
                                                          class="program-slide__item-icon"/>
-                                                    {time}
+                                                    {{ program.length }}
                                                 </div>
                                                 <div class="program-slide__item">
                                                     <img src="../static/images/calories.svg" alt=""
                                                          class="program-slide__item-icon"/>
-                                                    {calories}
+                                                    {{ program.calories }}
                                                 </div>
                                             </div>
                                         </div>
@@ -383,10 +292,10 @@
                                         <div class="swiper-slide">
                                             <div class='review-slide'>
                                                 <div class="review-slide__frame"
-                                                     style='background-image: url("../../media/{{ i.picture_src }}")'>
+                                                     style='background-image: url("/media/{{ i.image }}")'>
                                                     <div class="review-slide__info">
-                                                        <p class="review-slide__name">{name}</p>
-                                                        <p class="review-slide__text _16">{text}</p>
+                                                        <p class="review-slide__name">{{ i.name }}</p>
+                                                        <p class="review-slide__text _16">{{ i.text }}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -411,7 +320,7 @@
             </h2>
             <p class="questions__subtitle _18 center">Мы собрали самые часто задаваемые вопросы для вас</p>
             <div class="questions__box">
-                {% for i in list_questions %}
+                {% for i in questions %}
                     <div class="questions__item" onclick="handler({{ forloop.counter }}-1)">
                         <div class="questions__item-top">
                             <p class="questions__item-title">{{ i.title }}</p>

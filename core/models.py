@@ -106,19 +106,6 @@ class WorkoutProgram(models.Model):
     ]
     level = models.CharField(max_length=1, choices=CHOICES)
 
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        super().save(self)
-        self.trainer.programs = self.trainer.programs + 1
-        print(self.trainer_id)
-        # self.trainer.programs = len(WorkoutProgram.objects.filter(trainer_id=self.trainer_id))
-        self.trainer.save()
-
-    def delete(self, *args, **kwargs):
-        # self.trainer.programs = self.trainer.programs - 1
-        self.trainer.programs = len(WorkoutProgram.objects.filter(trainer_id=self.trainer_id))
-        self.trainer.save()
-        super(WorkoutProgram, self).delete(*args, **kwargs)
-
     def __str__(self):
         return self.name
 
@@ -133,22 +120,22 @@ class Workout(models.Model):
     picture_src = models.ImageField()
     calories = models.IntegerField(default=0)
     pub_date = models.DateField(auto_created=True, default=datetime.now)
-    trainer = models.ForeignKey(Trainer, on_delete=models.CASCADE, default='')
-    direction = models.ForeignKey(Direction, on_delete=models.SET_NULL, default=1, null=True)
-    program = models.ForeignKey(WorkoutProgram, on_delete=models.CASCADE, default=1)
+    trainer = models.ForeignKey(Trainer, on_delete=models.CASCADE)
+    direction = models.ForeignKey(Direction, on_delete=models.SET_NULL, null=True)
+    program = models.ForeignKey(WorkoutProgram, on_delete=models.CASCADE)
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super().save(self)
-        self.program.trainer.workouts = self.program.trainer.workouts + 1
+        self.trainer.workouts = self.trainer.workouts + 1
         self.program.amount_of_workouts = self.program.amount_of_workouts + 1
+        self.trainer.save()
         self.program.save()
-        self.program.trainer.save()
 
     def delete(self, *args, **kwargs):
-        self.program.trainer.workouts = self.program.trainer.workouts - 1
+        self.trainer.workouts = self.trainer.workouts - 1
         self.program.amount_of_workouts = self.program.amount_of_workouts - 1
         self.program.save()
-        self.program.trainer.save()
+        self.trainer.save()
         super(Workout, self).delete(*args, **kwargs)
 
     def __str__(self):

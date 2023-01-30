@@ -16,3 +16,4 @@ admin.site.register(Question)
 admin.site.register(Subscription)
 admin.site.register(Payment)
 admin.site.register(BlogComment)
+

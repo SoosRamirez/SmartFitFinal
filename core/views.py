@@ -42,7 +42,7 @@ def personalinfo(request):
             form = PersonalInfoForm(request.POST, instance=get_object_or_404(PersonalInfo, user=request.user))
         else:
             form = PersonalInfoForm(request.POST)
-        print(form['birthdate'])
+        print(form.is_valid())
         if form.is_valid():
             print('hello')
             form.save()

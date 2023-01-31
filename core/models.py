@@ -172,7 +172,7 @@ class PersonalInfo(models.Model):
     height = models.IntegerField(null=True)
     email = models.CharField(max_length=30, null=True)
     sex = models.CharField(max_length=20, null=True)
-    birthdate = models.DateField()
+    birthdate = models.DateField(null=True)
     CHOICES = [
         ('1', 'Начальный'),
         ('2', 'Средний'),

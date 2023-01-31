@@ -1,11 +1,13 @@
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_protect
 
+from SmartFitFinal import settings
 from core.forms import CommentForm
 from core.models import BlogPost, BlogComment, Trainer, Direction, Trend, WorkoutProgram, Feedback, Question, Workout, \
-    Subscription
+    Subscription, PersonalInfo
 
 
 @login_required
@@ -24,9 +26,23 @@ def lk(request):
 @login_required
 def personalinfo(request):
     template = 'personalinfo.html'
-    context = {
-
-    }
+    info = PersonalInfo.objects.filter(user=request.user)
+    if request.method == "POST":
+        if request.FILES:
+            image = request.FILES['image']
+            fs = FileSystemStorage()
+            filename = fs.save(image.name, image)
+            print(filename)
+            if info:
+                PersonalInfo.objects.filter(user=request.user).update(image=filename)
+            else:
+                PersonalInfo.objects.create(user=request.user, image=filename)
+    if info:
+        context = {
+            'info': get_object_or_404(PersonalInfo, user=request.user)
+        }
+    else:
+        return render(request, template)
     return render(request, template, context)
 
 

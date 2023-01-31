@@ -61,10 +61,10 @@
                {% if request.path == 'home' %}class="header__item active"
                {% else %}class="header__item"{% endif %}>Сообщество</a>
         </div>
-            <a href="{% url 'lk' %}" class="header__profile">
-                {{ request.user.username }}
-                <div class="header__avatar">{{ request.user.username.0 }}</div>
-            </a>
+        <a href="{% url 'lk' %}" class="header__profile">
+            {{ request.user.username }}
+            <div class="header__avatar">{{ request.user.username.0 }}</div>
+        </a>
         <div class='header-mobile__button hidden' onclick="mobileOpened()" id="button-menu-mobile">
             <div class="header-mobile__line line"></div>
         </div>
@@ -81,11 +81,11 @@
             <a href="{% url 'home' %}"
                {% if request.path == 'home' %}class="header__item active"
                {% else %}class="header__item"{% endif %}>Сообщество</a>
-                <a href="{% url 'lk' %}" class="header__profile" href="{% url 'lk' %}"
-                   class="header__profile" onclick="mobileOpened()">
-                    {{ request.user.username }}
-                    <div class="header__avatar">{{ request.user.username.0 }}</div>
-                </a>
+            <a href="{% url 'lk' %}" class="header__profile" href="{% url 'lk' %}"
+               class="header__profile" onclick="mobileOpened()">
+                {{ request.user.username }}
+                <div class="header__avatar">{{ request.user.username.0 }}</div>
+            </a>
         </div>
     </div>
 </header>
@@ -143,132 +143,149 @@
         <div class="profile__wrapper">
             <div class="personal">
                 <h3 class="prof">Личные данные</h3>
-            <form action="{% url 'personalinfo' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
-                <div class="personal__avatar">
-                    <img src="../static/images/Avatar.svg" alt="" class="personal__avatar-image">
-                    <div class="personal__avatar-box">
-                        <div class="personal__avatar-buttons">
-                            <input id="file-input" type="file" name="image">
-                            <button class='button _clear personal__button-avatar' type="submit">
-                                <div class="button__inner">
-                                    Сменить фото
-                                </div>
-                            </button>
-                            <button class='button personal__button-avatar'>
-                                <div class="button__inner">
-                                    Удалить
-                                </div>
-                            </button>
-                        </div>
-                        <p class="personal__avatar-misc">
-                            Допустимые типы файлов JPEG, <br/> GIF or PNG, 150x150px, 1MB
-                        </p>
-                    </div>
-                </div>
-                <div class="personal__layout">
-                    <label class="text-field__label">
-                        Ваше имя
-                        <div class="text-field__box">
-                            <input type="text" class='text-field personal__input' name="name"
-                                   placeholder='{% if info.name %}{{ info.name }}{% else %}Имя{% endif %}' value="{{ info.name }}">
-                        </div>
-                    </label>
-                    <div class="personal__buttons-box">
-                        <input type="hidden" value="{{ info.level }}" id="level_input" name="level">
-                        Уровень активности
-                        <div class="personal__buttons">
-                            <button class='button personal__button {% if info.level != '1' %}_clear{% endif %} level_input_button'
-                            onclick="changeLevel(1)" type="button">
-                                <div class="button__inner">
-                                    начальный
-                                </div>
-                            </button>
-                            <button class='button personal__button {% if info.level != '2' %}_clear{% endif %} level_input_button'
-                            onclick="changeLevel(2)" type="button">
-                                <div class="button__inner">
-                                    средний
-                                </div>
-                            </button>
-                            <button class='button personal__button {% if info.level != '3' %}_clear{% endif %} level_input_button'
-                            onclick="changeLevel(3)" type="button">
-                                <div class="button__inner">
-                                    эксперт
-                                </div>
-                            </button>
+                <form action="{% url 'personalinfo' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="personal__avatar">
+                        {% if info.image %}
+                            <img src="/media/{{ info.image }}" alt="" class="personal__avatar-image">
 
+                        {% else %}
+                            <img src="../static/images/Avatar.svg" alt="" class="personal__avatar-image">
+                        {% endif %}
+                        <div class="personal__avatar-box">
+                            <div class="personal__avatar-buttons">
+                                <input id="file-input" type="file" name="image">
+                                <button class='button _clear personal__button-avatar' type="submit">
+                                    <div class="button__inner">
+                                        Сменить фото
+                                    </div>
+                                </button>
+                                <button class='button personal__button-avatar'>
+                                    <div class="button__inner">
+                                        Удалить
+                                    </div>
+                                </button>
+                            </div>
+                            <p class="personal__avatar-misc">
+                                Допустимые типы файлов JPEG, <br/> GIF or PNG, 150x150px, 1MB
+                            </p>
                         </div>
                     </div>
-                    <label class="text-field__label">
-                        Ваша фамилия
-                        <div class="text-field__box">
-                            <input type="text" class='text-field personal__input' name="surname"
-                                   placeholder='{% if info.surname %}{{ info.surname }}{% else %}Фамилия{% endif %}'value="{{ info.surname }}">
-                        </div>
-                    </label>
-                    <label class="text-field__label">
-                        Ваш вес
-                        <div class="text-field__box">
-                            <input type="text" class='text-field personal__input' name="mass"
-                                   placeholder='{% if info.mass %}{{ info.mass }}{% else %}Вес{% endif %}' value="{{ info.mass }}">
-                        </div>
-                    </label>
-                    <label class="text-field__label">
-                        Ваш телефон
-                        <div class="text-field__box">
-                            <input type="text" class='text-field personal__input' name="mobile"
-                                   placeholder='{% if info.mobile %}{{ info.mobile }}{% else %}Телефон{% endif %}' value="{{ info.mobile }}">
-                        </div>
-                    </label>
-                    <label class="text-field__label">
-                        Ваш рост
-                        <div class="text-field__box">
-                            <input type="text" class='text-field personal__input' name="height"
-                                   placeholder='{% if info.height %}{{ info.height }}{% else %}Рост{% endif %} (см)' value="{{ info.height }}">
-                        </div>
-                    </label>
-                    <label class="text-field__label">
-                        Ваш Email
-                        <div class="text-field__box">
-                            <input type="text" class='text-field personal__input' name="email"
-                                   placeholder='{% if info.email %}{{ info.email }}{% else %}Адрес электронной почты{% endif %}' value="{{ info.email }}">
-                        </div>
-                    </label>
-                    <label class="text-field__label">
-                        Ваш пол
-                        <div class="text-field__box">
-                            <input type="text" class='text-field personal__input' name="sex"
-                                   placeholder='{% if info.sex %}{{ info.sex }}{% else %}Пол{% endif %}' value="{{ info.sex }}">
-                        </div>
-                    </label>
-                    <label class="text-field__label">
-                        Ваш Instagram
-                        <div class="text-field__box">
-                            <input type="text" class='text-field personal__input' name="instagram"
-                                   placeholder='{% if info.instagram %}{{ info.instagram }}{% else %}/instagram.com{% endif %}' value="{{ info.instagram }}">
-                        </div>
-                    </label>
-                    <label class="text-field__label">
-                        Ваша дата рождения
-                        <div class="text-field__box">
-                            <input type="date" class='text-field personal__input' name="birth"
-                                   placeholder='{% if info.birthdate %}{{ info.birthdate|date:"Y-m-d" }}{% else %}Ваша дата рождения{% endif %}' value="{{ info.birthdate|date:"Y-m-d" }}">
-                        </div>
-                    </label>
-                    <div class="spacer"></div>
-                    <div class="personal__bottom">
-                        <button class='button personal__button _clear' onclick="passwordModal()">
-                            <div class="button__inner">
-                                Сменить пароль
+                    <div class="personal__layout">
+                        <label class="text-field__label">
+                            Ваше имя
+                            <div class="text-field__box">
+                                <input type="text" class='text-field personal__input' name="name"
+                                       placeholder='Имя'
+                                       value="{% if info.name is not None %}{{ info.name }}{% endif %}">
                             </div>
-                        </button>
-                        <button class='button personal__button' type="submit">
-                            <div class="button__inner">
-                                Изменить данные
+                        </label>
+                        <div class="personal__buttons-box">
+                            <input type="hidden" value="{{ info.level }}" id="level_input" name="level">
+                            Уровень активности
+                            <div class="personal__buttons">
+                                <button class='button personal__button {% if info.level != '1' %}_clear{% endif %} level_input_button'
+                                        onclick="changeLevel(1)" type="button">
+                                    <div class="button__inner">
+                                        начальный
+                                    </div>
+                                </button>
+                                <button class='button personal__button {% if info.level != '2' %}_clear{% endif %} level_input_button'
+                                        onclick="changeLevel(2)" type="button">
+                                    <div class="button__inner">
+                                        средний
+                                    </div>
+                                </button>
+                                <button class='button personal__button {% if info.level != '3' %}_clear{% endif %} level_input_button'
+                                        onclick="changeLevel(3)" type="button">
+                                    <div class="button__inner">
+                                        эксперт
+                                    </div>
+                                </button>
+
                             </div>
-                        </button>
+                        </div>
+                        <label class="text-field__label">
+                            Ваша фамилия
+                            <div class="text-field__box">
+                                <input type="text" class='text-field personal__input' name="surname"
+                                       placeholder='{% if info.surname %}{{ info.surname }}{% else %}Фамилия{% endif %}'
+                                       value="{{ info.surname }}">
+                            </div>
+                        </label>
+                        <label class="text-field__label">
+                            Ваш вес
+                            <div class="text-field__box">
+                                <input type="text" class='text-field personal__input' name="mass"
+                                       placeholder='{% if info.mass %}{{ info.mass }}{% else %}Вес{% endif %}'
+                                       value="{{ info.mass }}">
+                            </div>
+                        </label>
+                        <label class="text-field__label">
+                            Ваш телефон
+                            <div class="text-field__box">
+                                <input type="text" class='text-field personal__input' name="mobile"
+                                       placeholder='{% if info.mobile %}{{ info.mobile }}{% else %}Телефон{% endif %}'
+                                       value="{{ info.mobile }}">
+                            </div>
+                        </label>
+                        <label class="text-field__label">
+                            Ваш рост
+                            <div class="text-field__box">
+                                <input type="text" class='text-field personal__input' name="height"
+                                       placeholder='{% if info.height %}{{ info.height }}{% else %}Рост{% endif %} (см)'
+                                       value="{{ info.height }}">
+                            </div>
+                        </label>
+                        <label class="text-field__label">
+                            Ваш Email
+                            <div class="text-field__box">
+                                <input type="text" class='text-field personal__input' name="email"
+                                       placeholder='
+                                               {% if info.email %}{{ info.email }}{% else %}Адрес электронной почты{% endif %}'
+                                       value="{{ info.email }}">
+                            </div>
+                        </label>
+                        <label class="text-field__label">
+                            Ваш пол
+                            <div class="text-field__box">
+                                <input type="text" class='text-field personal__input' name="sex"
+                                       placeholder='{% if info.sex %}{{ info.sex }}{% else %}Пол{% endif %}'
+                                       value="{{ info.sex }}">
+                            </div>
+                        </label>
+                        <label class="text-field__label">
+                            Ваш Instagram
+                            <div class="text-field__box">
+                                <input type="text" class='text-field personal__input' name="instagram"
+                                       placeholder='
+                                               {% if info.instagram %}{{ info.instagram }}{% else %}/instagram.com{% endif %}'
+                                       value="{{ info.instagram }}">
+                            </div>
+                        </label>
+                        <label class="text-field__label">
+                            Ваша дата рождения
+                            <div class="text-field__box">
+                                <input type="date" class='text-field personal__input' name="birth"
+                                       placeholder='
+                                               {% if info.birthdate %}{{ info.birthdate|date:"Y-m-d" }}{% else %}Ваша дата рождения{% endif %}'
+                                       value="{{ info.birthdate|date:"Y-m-d" }}">
+                            </div>
+                        </label>
+                        <div class="spacer"></div>
+                        <div class="personal__bottom">
+                            <button class='button personal__button _clear' onclick="passwordModal()">
+                                <div class="button__inner">
+                                    Сменить пароль
+                                </div>
+                            </button>
+                            <button class='button personal__button' type="submit">
+                                <div class="button__inner">
+                                    Изменить данные
+                                </div>
+                            </button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
             </div>
         </div>
     </div>
@@ -363,15 +380,15 @@
         loginModal.classList.toggle('modal-disabled')
         loginBackground.classList.toggle('modal-disabled')
     }
-    const changeLevel =(index) =>{
+    const changeLevel = (index) => {
         const buttons = document.querySelectorAll('.level_input_button')
         document.getElementById('level_input').value = index;
-        for (let j = 0; j < buttons.length; j++){
-            if(j!=(index-1)) {
+        for (let j = 0; j < buttons.length; j++) {
+            if (j != (index - 1)) {
                 buttons[j].classList.add('_clear')
             }
         }
-        buttons[index-1].classList.remove('_clear')
+        buttons[index - 1].classList.remove('_clear')
     }
 </script>
 </html>

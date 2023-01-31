@@ -176,7 +176,7 @@
                             <div class="text-field__box">
                                 <input type="text" class='text-field personal__input' name="name"
                                        placeholder='Имя'
-                                       value="{% if info.name is not None %}{{ info.name }}{% endif %}">
+                                       value="{% if info.name is not None %}{{ info.name }}{% else %}{% endif %}">
                             </div>
                         </label>
                         <div class="personal__buttons-box">
@@ -212,6 +212,7 @@
                                        value="{% if info.surname is not None %}{{ info.surname }}{% endif %}">
                             </div>
                         </label>
+                    <input type="hidden" name="user" value="{{ request.user.id }}">
                         <label class="text-field__label">
                             Ваш вес
                             <div class="text-field__box">
@@ -241,7 +242,7 @@
                             <div class="text-field__box">
                                 <input type="text" class='text-field personal__input' name="email"
                                        placeholder='Адрес электронной почты'
-                                       value="{% if info.email is not None %}{{ info.email }}{% endif %}">
+                                       value=" {% if info.email is not None %}{{ info.email }}{% endif %}">
                             </div>
                         </label>
                         <label class="text-field__label">

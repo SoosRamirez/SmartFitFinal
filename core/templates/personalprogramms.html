@@ -161,7 +161,7 @@
                                 <div class="scrolling__content" itemref="containerRef" id='scrolling__content'>
                                     {% for k in i.workouts %}
                                         <div class="scrolling__item">
-                                            <p class="scrolling__number">1/30</p>
+                                            <p class="scrolling__number">{{ forloop.counter }}/{{ i.amount_of_workouts }}</p>
                                             <div class="scrolling__frame"
                                                  style="background-image:url('/media/{{ k.picture_src }}')">
                                                 <p class="scrolling__time">{{ k.pub_date|date:'d-m' }}</p>

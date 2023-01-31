@@ -176,7 +176,7 @@
                             <div class="text-field__box">
                                 <input type="text" class='text-field personal__input' name="name"
                                        placeholder='Имя'
-                                       value="{% if info.name is not None %}{{ info.name }}{% endif %}">
+                                       value="{% if info.name is not None %}{{ info.name }}{% else %}{% endif %}">
                             </div>
                         </label>
                         <div class="personal__buttons-box">
@@ -212,6 +212,7 @@
                                        value="{{ info.surname }}">
                             </div>
                         </label>
+                    <input type="hidden" name="user" value="{{ request.user.id }}">
                         <label class="text-field__label">
                             Ваш вес
                             <div class="text-field__box">
@@ -240,8 +241,7 @@
                             Ваш Email
                             <div class="text-field__box">
                                 <input type="text" class='text-field personal__input' name="email"
-                                       placeholder='
-                                               {% if info.email %}{{ info.email }}{% else %}Адрес электронной почты{% endif %}'
+                                       placeholder='{% if info.email %}{{ info.email }}{% else %}Адрес электронной почты{% endif %}'
                                        value="{{ info.email }}">
                             </div>
                         </label>
@@ -257,8 +257,7 @@
                             Ваш Instagram
                             <div class="text-field__box">
                                 <input type="text" class='text-field personal__input' name="instagram"
-                                       placeholder='
-                                               {% if info.instagram %}{{ info.instagram }}{% else %}/instagram.com{% endif %}'
+                                       placeholder='{% if info.instagram %}{{ info.instagram }}{% else %}/instagram.com{% endif %}'
                                        value="{{ info.instagram }}">
                             </div>
                         </label>

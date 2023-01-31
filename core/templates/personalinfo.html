@@ -208,67 +208,64 @@
                             Ваша фамилия
                             <div class="text-field__box">
                                 <input type="text" class='text-field personal__input' name="surname"
-                                       placeholder='{% if info.surname %}{{ info.surname }}{% else %}Фамилия{% endif %}'
-                                       value="{{ info.surname }}">
+                                       placeholder='Фамилия'
+                                       value="{% if info.surname is not None %}{{ info.surname }}{% endif %}">
                             </div>
                         </label>
                         <label class="text-field__label">
                             Ваш вес
                             <div class="text-field__box">
                                 <input type="text" class='text-field personal__input' name="mass"
-                                       placeholder='{% if info.mass %}{{ info.mass }}{% else %}Вес{% endif %}'
-                                       value="{{ info.mass }}">
+                                       placeholder='Вес'
+                                       value="{% if info.mass is not None %}{{ info.mass }}{% endif %}">
                             </div>
                         </label>
                         <label class="text-field__label">
                             Ваш телефон
                             <div class="text-field__box">
                                 <input type="text" class='text-field personal__input' name="mobile"
-                                       placeholder='{% if info.mobile %}{{ info.mobile }}{% else %}Телефон{% endif %}'
-                                       value="{{ info.mobile }}">
+                                       placeholder='Телефон'
+                                       value="{% if info.mobile is not None %}{{ info.mobile }}{% endif %}">
                             </div>
                         </label>
                         <label class="text-field__label">
                             Ваш рост
                             <div class="text-field__box">
                                 <input type="text" class='text-field personal__input' name="height"
-                                       placeholder='{% if info.height %}{{ info.height }}{% else %}Рост{% endif %} (см)'
-                                       value="{{ info.height }}">
+                                       placeholder='Рост (см)'
+                                       value="{% if info.height is not None %}{{ info.height }}{% endif %}">
                             </div>
                         </label>
                         <label class="text-field__label">
                             Ваш Email
                             <div class="text-field__box">
                                 <input type="text" class='text-field personal__input' name="email"
-                                       placeholder='
-                                               {% if info.email %}{{ info.email }}{% else %}Адрес электронной почты{% endif %}'
-                                       value="{{ info.email }}">
+                                       placeholder='Адрес электронной почты'
+                                       value="{% if info.email is not None %}{{ info.email }}{% endif %}">
                             </div>
                         </label>
                         <label class="text-field__label">
                             Ваш пол
                             <div class="text-field__box">
                                 <input type="text" class='text-field personal__input' name="sex"
-                                       placeholder='{% if info.sex %}{{ info.sex }}{% else %}Пол{% endif %}'
-                                       value="{{ info.sex }}">
+                                       placeholder='Пол'
+                                       value="{% if info.sex is not None %}{{ info.sex }}{% endif %}">
                             </div>
                         </label>
                         <label class="text-field__label">
                             Ваш Instagram
                             <div class="text-field__box">
                                 <input type="text" class='text-field personal__input' name="instagram"
-                                       placeholder='
-                                               {% if info.instagram %}{{ info.instagram }}{% else %}/instagram.com{% endif %}'
-                                       value="{{ info.instagram }}">
+                                       placeholder='/instagram.com'
+                                       value="{% if info.instagram is not None %}{{ info.instagram }}{% endif %}">
                             </div>
                         </label>
                         <label class="text-field__label">
                             Ваша дата рождения
                             <div class="text-field__box">
                                 <input type="date" class='text-field personal__input' name="birth"
-                                       placeholder='
-                                               {% if info.birthdate %}{{ info.birthdate|date:"Y-m-d" }}{% else %}Ваша дата рождения{% endif %}'
-                                       value="{{ info.birthdate|date:"Y-m-d" }}">
+                                       placeholder='Ваша дата рождения'
+                                       value="{% if info.birth is not None %}{{ info.birthdate|date:"Y-m-d" }}{% endif %}">
                             </div>
                         </label>
                         <div class="spacer"></div>

@@ -147,6 +147,7 @@
                     <div class="personal__avatar">
                         {% if info.image %}
                             <img src="/media/{{ info.image }}" alt="" class="personal__avatar-image">
+
                         {% else %}
                             <img src="../static/images/Avatar.svg" alt="" class="personal__avatar-image">
                         {% endif %}
@@ -175,10 +176,9 @@
                             <div class="text-field__box">
                                 <input type="text" class='text-field personal__input' name="name"
                                        placeholder='Имя'
-                                       value="{% if info.name is not None %}{{ info.name }}{% endif %}">
+                                       value="{% if info.name is not None %}{{ info.name }}{% else %}{% endif %}">
                             </div>
                         </label>
-                        <input type="hidden" value="{{ request.user.id }}"name="user">
                         <div class="personal__buttons-box">
                             <input type="hidden" value="{{ info.level }}" id="level_input" name="level">
                             Уровень активности
@@ -212,6 +212,7 @@
                                        value="{% if info.surname is not None %}{{ info.surname }}{% endif %}">
                             </div>
                         </label>
+                    <input type="hidden" name="user" value="{{ request.user.id }}">
                         <label class="text-field__label">
                             Ваш вес
                             <div class="text-field__box">
@@ -241,7 +242,7 @@
                             <div class="text-field__box">
                                 <input type="text" class='text-field personal__input' name="email"
                                        placeholder='Адрес электронной почты'
-                                       value="{% if info.email is not None %}{{ info.email }}{% endif %}">
+                                       value=" {% if info.email is not None %}{{ info.email }}{% endif %}">
                             </div>
                         </label>
                         <label class="text-field__label">
@@ -263,10 +264,9 @@
                         <label class="text-field__label">
                             Ваша дата рождения
                             <div class="text-field__box">
-                                <input type="date" class='text-field personal__input' name="birthdate"
+                                <input type="date" class='text-field personal__input' name="birth"
                                        placeholder='Ваша дата рождения'
-                                       value="
-                                               {% if info.birthdate is not None %}{{ info.birthdate|date:"Y-m-d" }}{% endif %}">
+                                       value="{% if info.birth is not None %}{{ info.birthdate|date:"Y-m-d" }}{% endif %}">
                             </div>
                         </label>
                         <div class="spacer"></div>

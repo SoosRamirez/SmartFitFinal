@@ -37,8 +37,12 @@ def personalinfo(request):
                 PersonalInfo.objects.filter(user=request.user).update(image=filename)
             else:
                 PersonalInfo.objects.create(user=request.user, image=filename)
-        form = PersonalInfoForm(request.POST)
-        print(form['user'])
+        if info:
+            print('asdf')
+            form = PersonalInfoForm(request.POST, instance=get_object_or_404(PersonalInfo, user=request.user))
+        else:
+            form = PersonalInfoForm(request.POST)
+        print(form['birthdate'])
         if form.is_valid():
             print('hello')
             form.save()
@@ -54,8 +58,11 @@ def personalinfo(request):
 @login_required
 def personalprogramms(request):
     template = 'personalprogramms.html'
+    e = WorkoutProgram.objects.filter(subscribers=request.user)
+    for i in e:
+        i.workouts = Workout.objects.filter(program=i)
     context = {
-
+        'list_programs': e,
     }
     return render(request, template, context)
 

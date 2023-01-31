@@ -145,7 +145,7 @@
                 {% for i in list_programs %}
                     <div class="program-item">
                         <div class="program-item__top">
-                            <img src="/media/{{ i.picture_src }}" alt="" class="program-item__image"/>
+                            <img src="/media/{{ i.main_pic }}" alt="" class="program-item__image"/>
                             <div class="program-item__info">
                                 <img src="../static/images/dots.svg" alt="" class="program-item__dots">
                                 <p class="program-item__title">{{ i.name }}</p>
@@ -155,7 +155,7 @@
                         </div>
                         {% if i.workouts %}
                             <ScrolligContent small class="program-item__scroll"/>
-                            <div class='scrolling program-item__scroll'>
+                            <div class='scrolling program-item__scroll small'>
                                 <input type="range" class="scrolling__bar" value="0" id='scrolling__bar'
                                        itemref='scrollRef'>
                                 <div class="scrolling__content" itemref="containerRef" id='scrolling__content'>
@@ -163,7 +163,7 @@
                                         <div class="scrolling__item">
                                             <p class="scrolling__number">1/30</p>
                                             <div class="scrolling__frame"
-                                                 style="background-image:url('/media/{{ k.picture }}')">
+                                                 style="background-image:url('/media/{{ k.picture_src }}')">
                                                 <p class="scrolling__time">{{ k.pub_date|date:'d-m' }}</p>
                                                 <img src="../static/images/rewind.svg" alt="" class="scrolling__icon">
                                             </div>
@@ -265,6 +265,14 @@
         const loginBackground = document.getElementById("logout-modal-background")
         loginModal.classList.toggle('modal-disabled')
         loginBackground.classList.toggle('modal-disabled')
+    }
+    const bars = document.querySelectorAll(".scrolling__bar")
+    const boxes = document.querySelectorAll(".scrolling__content")
+    for (let i = 0; i < bars.length; i++) {
+        bars[i].onchange = (e) => {
+            const total = boxes[i].scrollWidth - boxes[i].offsetWidth
+            boxes[i].scrollLeft = total * (e.target.value / 100)
+        }
     }
 </script>
 </html>

@@ -163,22 +163,22 @@ class Subscription(models.Model):
 # ready
 class PersonalInfo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(null=True)
-    name = models.CharField(max_length=20, null=True)
-    surname = models.CharField(max_length=20, null=True)
-    mobile = models.CharField(max_length=20, null=True)
-    instagram = models.CharField(max_length=20, null=True)
-    mass = models.IntegerField(null=True)
-    height = models.IntegerField(null=True)
-    email = models.CharField(max_length=30, null=True)
-    sex = models.CharField(max_length=20, null=True)
-    birthdate = models.DateField(null=True)
+    image = models.ImageField(null=True, blank=True)
+    name = models.CharField(max_length=20, null=True, blank=True)
+    surname = models.CharField(max_length=20, null=True, blank=True)
+    mobile = models.CharField(max_length=20, null=True, blank=True)
+    instagram = models.CharField(max_length=20, null=True, blank=True)
+    mass = models.IntegerField(null=True, blank=True)
+    height = models.IntegerField(null=True, blank=True)
+    email = models.CharField(max_length=30, null=True, blank=True)
+    sex = models.CharField(max_length=20, null=True, blank=True)
+    birthdate = models.DateField(null=True, blank=True)
     CHOICES = [
         ('1', 'Начальный'),
         ('2', 'Средний'),
         ('3', 'Эксперт'),
     ]
-    level = models.CharField(max_length=1, choices=CHOICES, default=1)
+    level = models.CharField(max_length=1, choices=CHOICES, default=1, blank=True)
 
 
 # ready

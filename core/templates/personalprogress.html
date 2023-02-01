@@ -146,11 +146,12 @@
                     <div class="progress__fields">
                         <h3 class="prof progress__title-nm">Параметры</h3>
                         <form action="{% url 'personalprogres' %}" method="post">{% csrf_token %}
+                        <input type="hidden" value="{{ request.user.id }}" name="user">
                             <label class="text-field__label">
                                 Вес
                                 <div class="text-field__box">
                                     <input type='number' class='text-field' placeholder='Вес (кг)' name="mass"
-                                           value="{{ progress.0.mass }}">
+                                           value="{% if progress.mass is not None %}{{ progress.mass }}{% else %}{% endif %}">
                                     <button class='button text-field__button' type="submit">
                                         <div class="button__inner">
                                             Сохранить
@@ -162,7 +163,7 @@
                                 Обхват талии
                                 <div class="text-field__box">
                                     <input type='number' class='text-field' placeholder='Обхват талии (см)' name="waist"
-                                           value="{{ progress.0.waist }}">
+                                           value="{% if progress.waist is not None %}{{ progress.waist }}{% else %}{% endif %}">
                                     <button class='button text-field__button' type="submit">
                                         <div class="button__inner">
                                             Сохранить
@@ -174,7 +175,7 @@
                                 Обхват бёдер
                                 <div class="text-field__box">
                                     <input type='number' class='text-field' placeholder='Обхват бёдер (см)' name="hips"
-                                           value="{{ progress.0.hips }}">
+                                           value="{% if progress.hips is not None %}{{ progress.hips }}{% else %}{% endif %}">
                                     <button class='button text-field__button' type="submit">
                                         <div class="button__inner">
                                             Сохранить
@@ -186,7 +187,7 @@
                                 Обхват груди
                                 <div class="text-field__box">
                                     <input type='number' class='text-field' placeholder='Обхват груди (см)' name="chest"
-                                           value="{{ progress.0.chest }}">
+                                           value="{% if progress.chest is not None %}{{ progress.chest }}{% else %}{% endif %}">
                                     <button class='button text-field__button' type="submit">
                                         <div class="button__inner">
                                             Сохранить
@@ -198,7 +199,7 @@
                                 Обхват рук
                                 <div class="text-field__box">
                                     <input type='number' class='text-field' placeholder='Обхват рук (см)' name="arms"
-                                           value="{{ progress.0.arms }}">
+                                           value="{% if progress.arms is not None %}{{ progress.arms }}{% else %}{% endif %}">
                                     <button class='button text-field__button' type="submit">
                                         <div class="button__inner">
                                             Сохранить
@@ -210,7 +211,7 @@
                                 Обхват ног
                                 <div class="text-field__box">
                                     <input type='number' class='text-field' placeholder='Обхват ног (см)' name="legs"
-                                           value="{{ progress.0.legs }}">
+                                           value="{% if progress.legs is not None %}{{ progress.legs }}{% else %}{% endif %}">
                                     <button class='button text-field__button' type="submit">
                                         <div class="button__inner">
                                             Сохранить
@@ -240,15 +241,14 @@
                                 </div>
                             </button>
                         </div>
-                        <form action="{% url 'personalprogres' %}" method="post"
-                              enctype="multipart/form-data">{% csrf_token %}
+                        <form action="{% url 'personalprogres' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
                             <div class="progress__content">
                                 <div class="progress__item">
                                     <p class="progress__subtitle">Первое фото</p>
-                                    {% if progress.0.prev_pic_front %}
+                                    {% if progress.prev_pic_front %}
                                         <div class="progress__frame"
-                                             style='background-image:url("/media/{{ progress.0.prev_pic_front }}")'>
-                                            <div class="progress__date">{{ progress.0.date|date:'d.m.Y' }}</div>
+                                             style='background-image:url("/media/{{ progress.prev_pic_front }}")'>
+                                            <div class="progress__date">{{ progress.date|date:'d.m.Y' }}</div>
                                         </div>
                                     {% else %}
                                         <div class="progress__add">
@@ -259,15 +259,15 @@
                                 </div>
                                 <div class="progress__item">
                                     <p class="progress__subtitle">Последнее фото</p>
-                                    {% if progress.0.cur_pic_front %}
+                                    {% if progress.cur_pic_front %}
                                         <div class="progress__frame"
-                                             style='background-image:url("/media/{{ progress.0.cur_pic_front }}")'>
-                                            <div class="progress__date">{{ progress.0.last_update|date:'d.m.Y' }}</div>
-                                            <input type="file" class="progress__add-input" name="cur_front">
+                                             style='background-image:url("/media/{{ progress.cur_pic_front }}")'>
+                                            <div class="progress__date">{{ progress.last_update|date:'d.m.Y' }}</div>
+                                            <input type="file" class="progress__add-input" name="cur_pic_front">
                                         </div>
                                     {% else %}
                                         <div class="progress__add">
-                                            <input type="file" class="progress__add-input" name="cur_front">
+                                            <input type="file" class="progress__add-input" name="cur_pic_front">
                                             <img src="../static/images/camera-plus.svg" alt=""
                                                  class="progress__add-icon"/>
                                         </div>
@@ -306,10 +306,10 @@
                             <div class="progress__content">
                                 <div class="progress__item">
                                     <p class="progress__subtitle">Первое фото</p>
-                                    {% if progress.0.prev_pic_side %}
+                                    {% if progress.prev_pic_side %}
                                         <div class="progress__frame"
-                                             style='background-image:url("/media/{{ progress.0.prev_pic_side }}")'>
-                                            <div class="progress__date">{{ progress.0.date|date:'d.m.Y' }}</div>
+                                             style='background-image:url("/media/{{ progress.prev_pic_side }}")'>
+                                            <div class="progress__date">{{ progress.date|date:'d.m.Y' }}</div>
                                         </div>
                                     {% else %}
                                         <div class="progress__add">
@@ -320,15 +320,15 @@
                                 </div>
                                 <div class="progress__item">
                                     <p class="progress__subtitle">Последнее фото</p>
-                                    {% if progress.0.cur_pic_side %}
+                                    {% if progress.cur_pic_side %}
                                         <div class="progress__frame"
-                                             style='background-image:url("/media/{{ progress.0.cur_pic_side }}")'>
-                                            <div class="progress__date">{{ progress.0.last_update|date:'d.m.Y' }}</div>
-                                            <input type="file" class="progress__add-input" name="cur_side">
+                                             style='background-image:url("/media/{{ progress.cur_pic_side }}")'>
+                                            <div class="progress__date">{{ progress.last_update|date:'d.m.Y' }}</div>
+                                            <input type="file" class="progress__add-input" name="cur_pic_side">
                                         </div>
                                     {% else %}
                                         <div class="progress__add">
-                                            <input type="file" class="progress__add-input" name="cur_side">
+                                            <input type="file" class="progress__add-input" name="cur_pic_side">
                                             <img src="../static/images/camera-plus.svg" alt=""
                                                  class="progress__add-icon"/>
                                         </div>
@@ -367,10 +367,10 @@
                             <div class="progress__content">
                                 <div class="progress__item">
                                     <p class="progress__subtitle">Первое фото</p>
-                                    {% if progress.0.prev_pic_back %}
+                                    {% if progress.prev_pic_back %}
                                         <div class="progress__frame"
-                                             style='background-image:url("/media/{{ progress.0.prev_pic_back }}")'>
-                                            <div class="progress__date">{{ progress.0.date|date:'d.m.Y' }}</div>
+                                             style='background-image:url("/media/{{ progress.prev_pic_back }}")'>
+                                            <div class="progress__date">{{ progress.date|date:'d.m.Y' }}</div>
                                         </div>
                                     {% else %}
                                         <div class="progress__add">
@@ -381,15 +381,15 @@
                                 </div>
                                 <div class="progress__item">
                                     <p class="progress__subtitle">Последнее фото</p>
-                                    {% if progress.0.cur_pic_back %}
+                                    {% if progress.cur_pic_back %}
                                         <div class="progress__frame"
-                                             style='background-image:url("/media/{{ progress.0.cur_pic_back }}")'>
-                                            <div class="progress__date">{{ progress.0.last_update|date:'d.m.Y' }}</div>
-                                            <input type="file" class="progress__add-input" name="cur_back">
+                                             style='background-image:url("/media/{{ progress.cur_pic_back }}")'>
+                                            <div class="progress__date">{{ progress.last_update|date:'d.m.Y' }}</div>
+                                            <input type="file" class="progress__add-input" name="cur_pic_back">
                                         </div>
                                     {% else %}
                                         <div class="progress__add">
-                                            <input type="file" class="progress__add-input" name="cur_back">
+                                            <input type="file" class="progress__add-input" name="cur_pic_back">
                                             <img src="../static/images/camera-plus.svg" alt=""
                                                  class="progress__add-icon"/>
                                         </div>

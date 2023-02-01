@@ -3,11 +3,13 @@ from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_protect
+from django.utils import timezone
+
 
 from SmartFitFinal import settings
-from core.forms import CommentForm, PersonalInfoForm
+from core.forms import CommentForm, PersonalInfoForm, PersonalProgressForm
 from core.models import BlogPost, BlogComment, Trainer, Direction, Trend, WorkoutProgram, Feedback, Question, Workout, \
-    Subscription, PersonalInfo, Payment
+    Subscription, PersonalInfo, Payment, Progress
 
 
 @login_required
@@ -32,12 +34,14 @@ def personalinfo(request):
             image = request.FILES['image']
             fs = FileSystemStorage()
             filename = fs.save(image.name, image)
-            print(filename)
             if info:
                 PersonalInfo.objects.filter(user=request.user).update(image=filename)
             else:
                 PersonalInfo.objects.create(user=request.user, image=filename)
-        form = PersonalInfoForm(request.POST)
+        if info:
+            form = PersonalInfoForm(request.POST, instance=get_object_or_404(PersonalInfo, user=request.user))
+        else:
+            form = PersonalInfoForm(request.POST)
         print(form['user'])
         if form.is_valid():
             print('hello')
@@ -54,20 +58,11 @@ def personalinfo(request):
 @login_required
 def personalprogramms(request):
     template = 'personalprogramms.html'
+    e = WorkoutProgram.objects.filter(subscribers=request.user)
+    for i in e:
+        i.workouts = Workout.objects.filter(program=i)
     context = {
-
-    }
-    return render(request, template, context)
-
-
-def home(request):
-    template = 'index.html'
-    context = {
-        "programs_list":  WorkoutProgram.objects.all()[:10],
-        "blog": BlogPost.objects.all()[:10],
-        "trainers": Trainer.objects.order_by('subscribers'),
-        'reviews': Feedback.objects.all(),
-        'questions': Question.objects.all(),
+        'list_programs': e,
     }
     return render(request, template, context)
 
@@ -85,9 +80,55 @@ def personalworkouts(request):
 @login_required
 def personalprogress(request):
     template = 'personalprogress.html'
-    context = {
-
-    }
+    progress = Progress.objects.filter(user=request.user)
+    if request.method == "POST":
+        if request.FILES:
+            cur_pic_front = request.FILES.get('cur_pic_front', False)
+            cur_pic_side = request.FILES.get('cur_pic_side', False)
+            cur_pic_back = request.FILES.get('cur_pic_back', False)
+            if cur_pic_front:
+                fs = FileSystemStorage()
+                filename = fs.save(cur_pic_front.name, cur_pic_front)
+                print(filename)
+                if progress:
+                    prev = get_object_or_404(Progress, user=request.user).cur_pic_front.name
+                    Progress.objects.filter(user=request.user).update(cur_pic_front=filename, last_update=timezone.now())
+                    Progress.objects.filter(user=request.user).update(prev_pic_front=prev, last_update=timezone.now())
+                else:
+                    Progress.objects.create(user=request.user, cur_pic_front=filename)
+            if cur_pic_side:
+                fs = FileSystemStorage()
+                filename = fs.save(cur_pic_side.name, cur_pic_side)
+                if progress:
+                    prev = get_object_or_404(Progress, user=request.user).cur_pic_side.name
+                    Progress.objects.filter(user=request.user).update(cur_pic_side=filename, last_update=timezone.now())
+                    Progress.objects.filter(user=request.user).update(prev_pic_side=prev, last_update=timezone.now())
+                else:
+                    Progress.objects.create(user=request.user, cur_pic_side=filename)
+            if cur_pic_back:
+                fs = FileSystemStorage()
+                filename = fs.save(cur_pic_back.name, cur_pic_back)
+                if progress:
+                    prev = get_object_or_404(Progress, user=request.user).cur_pic_side.name
+                    Progress.objects.filter(user=request.user).update(cur_pic_back=filename,last_update=timezone.now())
+                    Progress.objects.filter(user=request.user).update(prev_pic_back=prev, last_update=timezone.now())
+                else:
+                    Progress.objects.create(user=request.user, cur_pic_back=filename)
+        if progress:
+            print('user')
+            form = PersonalProgressForm(request.POST, instance=get_object_or_404(Progress, user=request.user))
+        else:
+            print('no')
+            form = PersonalProgressForm(request.POST)
+        if form.is_valid():
+            print('hello')
+            form.save()
+    if progress:
+        context = {
+            'progress': get_object_or_404(Progress, user=request.user),
+        }
+    else:
+        return render(request, template)
     return render(request, template, context)
 
 
@@ -111,6 +152,18 @@ def logingin(request):
     else:
         print(user)
         return redirect('start')
+
+
+def home(request):
+    template = 'index.html'
+    context = {
+        "programs_list": WorkoutProgram.objects.all()[:10],
+        "blog": BlogPost.objects.all()[:10],
+        "trainers": Trainer.objects.order_by('subscribers'),
+        'reviews': Feedback.objects.all(),
+        'questions': Question.objects.all(),
+    }
+    return render(request, template, context)
 
 
 def trainers(request):

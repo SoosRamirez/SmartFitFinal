@@ -1,5 +1,5 @@
 from django import forms
-from .models import BlogComment, PersonalInfo
+from .models import BlogComment, PersonalInfo, Progress
 
 
 class CommentForm(forms.ModelForm):
@@ -25,3 +25,21 @@ class PersonalInfoForm(forms.ModelForm):
         self.fields['sex'].required = False
         self.fields['birthdate'].required = False
         self.fields['level'].required = False
+
+
+class PersonalProgressForm(forms.ModelForm):
+    class Meta:
+        model = Progress
+        fields = ['mass', 'hips', 'arms', 'chest', 'legs', 'waist', 'user']
+
+    def __init__(self, *args, **kwargs):
+        super(PersonalProgressForm, self).__init__(*args, **kwargs)
+        self.fields['mass'].required = False
+        self.fields['hips'].required = False
+        self.fields['arms'].required = False
+        self.fields['chest'].required = False
+        self.fields['legs'].required = False
+        self.fields['waist'].required = False
+
+
+

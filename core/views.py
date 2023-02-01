@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_protect
 from SmartFitFinal import settings
 from core.forms import CommentForm, PersonalInfoForm
 from core.models import BlogPost, BlogComment, Trainer, Direction, Trend, WorkoutProgram, Feedback, Question, Workout, \
-    Subscription, PersonalInfo
+    Subscription, PersonalInfo, Payment
 
 
 @login_required
@@ -63,7 +63,11 @@ def personalprogramms(request):
 def home(request):
     template = 'index.html'
     context = {
-
+        "programs_list":  WorkoutProgram.objects.all()[:10],
+        "blog": BlogPost.objects.all()[:10],
+        "trainers": Trainer.objects.order_by('subscribers'),
+        'reviews': Feedback.objects.all(),
+        'questions': Question.objects.all(),
     }
     return render(request, template, context)
 
@@ -91,7 +95,7 @@ def personalprogress(request):
 def subscription(request):
     template = 'personalpayments.html'
     context = {
-
+        'payments': Payment.objects.filter(user=request.user).order_by('date_subscribed'),
     }
     return render(request, template, context)
 
@@ -185,11 +189,9 @@ def blogpost(request, post_id):
 def subscribe(request, program_id):
     subscriptions = Subscription.objects.all()
     for sub in subscriptions:
-        print('sub')
         if sub.program.id == program_id and sub.user_id == request.user.id:
             return redirect('program', program_id)
         else:
-            print(sub.program.id, sub.user_id)
             Subscription.objects.create(user_id=request.user.id, program_id=program_id, workout_stopped=0)
     return redirect('program', program_id)
 

@@ -347,16 +347,16 @@
                                 <div class="swiper-wrapper">
                                     {% for i in reviews %}
                                         <div class="swiper-slide">
-                                            <div class='review-slide'>
-                                                <div class="review-slide__frame"
-                                                     style='background-image: url("/media/{{ i.image }}")'>
-                                                    <div class="review-slide__info">
-                                                        <p class="review-slide__name">{{ i.name }}</p>
-                                                        <p class="review-slide__text _16">{{ i.text }}</p>
-                                                    </div>
-                                                </div>
+                                        <div class='review-slide'>
+                                            <div class="review-slide__frame" style='
+                                                    background-image: url("/media/{{ i.image }}")'>
+                                            </div>
+                                            <div class="review-slide__info">
+                                                <p class="review-slide__name">{{ i.name }}</p>
+                                                <p class="review-slide__text _16">{{ i.text }}</p>
                                             </div>
                                         </div>
+                                    </div>
                                     {% endfor %}
                                 </div>
                             </div>

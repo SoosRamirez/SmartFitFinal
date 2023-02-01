@@ -143,7 +143,7 @@
             <div class="hero__left">
                 <p class="hero__subtitle">Фитнес от SmartFit</p>
                 <h1 class="hero__title">
-                    Ваше здоровое тело - <br/> наша{" "}
+                    Ваше здоровое тело - <br/> наша
                     <span class="underline">общая</span> цель
                 </h1>
                 <div class="hero__features">
@@ -160,7 +160,7 @@
                         Новые тренировки каждый месяц
                     </div>
                 </div>
-                <button class='button hero__button'>
+                <button class='button hero__button' formaction="{% url 'start' %}">
                     <div class="button__inner">
                         Начать тренировку
                         <img src='../static/images/bolt.svg' alt="" class="button__icon">
@@ -169,7 +169,7 @@
             </div>
             <div class="hero__right">
                 <img src='../static/images/hero.png' alt="" class="hero__image"/>
-                <button class='button hero__button mobile'>
+                <button class='button hero__button mobile' formaction="{% url 'start' %}">
                     <div class="button__inner">
                         Начать тренировку
                         <img src='../static/images/bolt.svg' alt="" class="button__icon">
@@ -180,7 +180,7 @@
 
         <div class="programs">
             <h2 class="programs__title">
-                Выберите программу, которая подходит именно{" "}
+                Выберите программу, которая подходит именно
                 <span class="underline small">вам</span>
             </h2>
             <p class="programs__subtitle _18 center">
@@ -193,29 +193,29 @@
                         <div class="carousel__inner">
                             <div class="carousel__swiper swiper-container main-programs">
                                 <div class="swiper-wrapper">
-                                    {% for i in list %}
+                                    {% for i in programs_list %}
                                         <div class="swiper-slide">
                                             <div class="program-slide">
                                                 <div class="program-slide__frame"
-                                                     style='background-image:url("../../media/{{ i.picture_src }}");background-size:cover;background-position:center'>
+                                                     style='background-image:url("/media/{{ i.preview_pic }}");background-size:cover;background-position:center'>
                                                 </div>
                                                 <div class="program-slide__bottom">
-                                                    <p class="program-slide__name">{name}</p>
+                                                    <p class="program-slide__name">{{ i.name }}</p>
                                                     <div class="program-slide__info">
                                                         <div class="program-slide__item">
                                                             <img src='../static/images/videos.svg' alt=""
                                                                  class="program-slide__item-icon"/>
-                                                            {videos}
+                                                            {{ i.amount_of_workouts }}
                                                         </div>
                                                         <div class="program-slide__item">
                                                             <img src='../static/images/time.svg' alt=""
                                                                  class="program-slide__item-icon"/>
-                                                            {time}
+                                                            {{ i.length }}
                                                         </div>
                                                         <div class="program-slide__item">
                                                             <img src='../static/images/calories.svg' alt=""
                                                                  class="program-slide__item-icon"/>
-                                                            {calories}
+                                                            {{ i.calories }}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -225,6 +225,11 @@
                                 </div>
                             </div>
                         </div>
+                        {% if request.user_agent.is_mobile %}
+                        {% else %}
+                            <div class='carousel__arrow-prev carouser__arrow main-programs__prev absolute'></div>
+                            <div class='carousel__arrow-next carouser__arrow main-programs__next absolute'></div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -232,7 +237,7 @@
 
         <div class="why">
             <h2 class="why__title left">
-                Почему SmartFit вам{" "}
+                Почему SmartFit вам
                 <span class="underline small">подходит</span>?
             </h2>
             <div class="why__box">
@@ -328,16 +333,16 @@
                                         <div class="swiper-slide">
                                             <div class='blog-slide main-blog__slide'>
                                                 <div class="blog-slide__frame"
-                                                     style='background-image: url("../../media/{{ i.file }}")'></div>
+                                                     style='background-image: url("/media/{{ i.preview_pic }}")'></div>
                                                 <div class="blog-slide__info">
-                                                    <p class="blog-slide__title">{title}</p>
+                                                    <p class="blog-slide__title">{{ i.name }}</p>
                                                     <div class="blog-slide__misc">
-                                                        <p class="blog-slide__date">{date}</p>
+                                                        <p class="blog-slide__date">{{ i.pub_date }}</p>
                                                         <p class="blog-slide__time"></p>
                                                         <p class="blog-slide__likes">
                                                             <img src='../static/images/like.svg' alt=""
                                                                  class="blog-slide__heart"/>
-                                                            {likes}
+                                                            {{ i.likes }}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -350,7 +355,7 @@
                     </div>
                 </div>
             </div>
-            <button class='button main-blog__button'>
+            <button class='button main-blog__button' formaction="{% url 'start' %}">
                 <div class="button__inner">
                     начать тренировку
                     <img src='../static/images/bolt.svg' alt="" class="button__icon">
@@ -397,28 +402,28 @@
                         <div class="carousel__inner">
                             <div class="carousel__swiper swiper-container main-trainers__slider">
                                 <div class="swiper-wrapper">
-                                    {% for i in list %}
+                                    {% for i in trainers %}
                                         <div class="swiper-slide">
                                             <div class="trainer-slide">
                                                 <div class="trainer-slide__frame"
-                                                     style='background-image: url("../../media/{{ i.src }}")'></div>
+                                                     style='background-image: url("/media/{{ i.preview_pic }}")'></div>
                                                 <div class="trainer-slide__info">
-                                                    <p class="trainer-slide__name">{name}</p>
+                                                    <p class="trainer-slide__name">{{ i.name }}</p>
                                                     <div class="trainer-slide__misc">
                                                         <div class="trainer-slide__item">
                                                             <img src='../static/images/videos.svg' alt=""
                                                                  class="trainer-slide__item-icon"/>
-                                                            {videos}
+                                                            {{ i.workouts }}
                                                         </div>
                                                         <div class="trainer-slide__item">
                                                             <img src='../static/images/apps.svg' alt=""
                                                                  class="trainer-slide__item-icon"/>
-                                                            {programs}
+                                                            {{ i.programs }}
                                                         </div>
                                                         <div class="trainer-slide__item">
                                                             <img src='../static/images/user.svg' alt=""
                                                                  class="trainer-slide__item-icon"/>
-                                                            {people}
+                                                            {{ i.subscribers }}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -474,12 +479,12 @@
                                     {% for i in reviews %}
                                         <div class="swiper-slide">
                                             <div class='review-slide'>
-                                                <div class="review-slide__frame"
-                                                     style='background-image: url("../../media/{{ i.picture_src }}")'>
-                                                    <div class="review-slide__info">
-                                                        <p class="review-slide__name">{name}</p>
-                                                        <p class="review-slide__text _16">{text}</p>
-                                                    </div>
+                                                <div class="review-slide__frame" style='
+                                                        background-image: url("/media/{{ i.image }}")'>
+                                                </div>
+                                                <div class="review-slide__info">
+                                                    <p class="review-slide__name">{{ i.name }}</p>
+                                                    <p class="review-slide__text _16">{{ i.text }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -503,7 +508,7 @@
             </h2>
             <p class="questions__subtitle _18 center">Мы собрали самые часто задаваемые вопросы для вас</p>
             <div class="questions__box">
-                {% for i in list_questions %}
+                {% for i in questions %}
                     <div class="questions__item" onclick="handler({{ forloop.counter }}-1)">
                         <div class="questions__item-top">
                             <p class="questions__item-title">{{ i.title }}</p>
@@ -615,5 +620,35 @@
         loginModal.classList.toggle('modal-disabled')
         loginBackground.classList.toggle('modal-disabled')
     }
+</script>
+<script type="module">
+    import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.esm.browser.min.js'
+
+    var galleryTop = new Swiper('.reviews', {
+        centeredSlides: false,
+        loop: false,
+        slidesPerView: "auto",
+        spaceBetween: 40,
+        navigation: {
+            nextEl: `.reviews__next`,
+            prevEl: `.reviews__prev`,
+        },
+    });
+
+</script>
+<script type="module">
+    import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.esm.browser.min.js'
+
+    var galleryTop = new Swiper('.main-programs', {
+        centeredSlides: false,
+        loop: false,
+        slidesPerView: "auto",
+        spaceBetween: 40,
+        navigation: {
+            nextEl: `.main-programs__next`,
+            prevEl: `.main-programs__prev`,
+        },
+    });
+
 </script>
 </html>

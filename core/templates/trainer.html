@@ -162,7 +162,7 @@
                 <img src='../static/images/outline.svg' alt="" class="trainer__background"/>
                 <img src='/media/{{ trainer.main_pic }}' alt="" class="trainer__image"/>
             </div>
-            <button class='button trainer__button mobile'>
+            <button class='button trainer__button mobile' formaction="{% url 'programs' %}">
                 <div class="button__inner">
                     начать тренировку
                     <img src='../static/images/bolt.svg' alt="" class="button__icon">

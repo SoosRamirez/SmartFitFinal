@@ -39,5 +39,6 @@ urlpatterns = [
     path('programs/<int:program_id>', views.program, name='program'),
     path('subscribe/<int:program_id>', views.subscribe, name='subscribe'),
     path('blog/<int:post_id>', views.blogpost, name='post'),
+    path('like/<int:post_id>', views.like, name='like')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

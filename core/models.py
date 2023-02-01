@@ -35,7 +35,7 @@ class BlogPost(models.Model):
     main_pic = models.ImageField()
     text = models.TextField()
     pub_date = models.DateField(auto_now_add=True)
-    likes = models.IntegerField(default=0)
+    likes = models.ManyToManyField(User, through='Like')
     views = models.IntegerField(default=0)
     read_time = models.CharField(max_length=5, default='')
     author = models.TextField()
@@ -90,9 +90,6 @@ class WorkoutProgram(models.Model):
     preview_pic = models.ImageField()
     main_pic = models.ImageField()
     video = models.CharField(max_length=1000)
-    length = models.IntegerField(default=0)
-    calories = models.IntegerField(default=0)
-    amount_of_workouts = models.IntegerField(default=0)
     trainer = models.ForeignKey(Trainer, on_delete=models.CASCADE, default='0')
     directions = models.ForeignKey(Direction, on_delete=models.SET_NULL, null=True)
     description = models.TextField(max_length=200)
@@ -105,6 +102,10 @@ class WorkoutProgram(models.Model):
         ('4', 'Профессионал'),
     ]
     level = models.CharField(max_length=1, choices=CHOICES)
+
+    length = models.IntegerField(default=0)
+    calories = models.IntegerField(default=0)
+    amount_of_workouts = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
@@ -123,6 +124,7 @@ class Workout(models.Model):
     trainer = models.ForeignKey(Trainer, on_delete=models.CASCADE)
     direction = models.ForeignKey(Direction, on_delete=models.SET_NULL, null=True)
     program = models.ForeignKey(WorkoutProgram, on_delete=models.CASCADE)
+    num_in_program = models.IntegerField(default=0)
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super().save(self)
@@ -209,3 +211,8 @@ class Payment(models.Model):
     promo = models.CharField(max_length=20, null=True)
     sum = models.IntegerField()
     date_expired = models.DateField(null=True)
+
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE)

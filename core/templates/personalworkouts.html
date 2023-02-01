@@ -141,153 +141,80 @@
         </div>
     </div>
     <div class="profile__inner">
-    <div class="trainings">
-        <div class="trainings__top">
-            <p class="trainings__name">Стальной пресс</p>
-            <p class="trainings__num">1/30</p>
-        </div>
-        <div class="trainings__video">
-            <img src='../static/images/sample-video.png' alt="" class="trainings__sample"/>
-            <img src='../static/images/play-circle.svg' alt="" class="trainings__play"/>
-        </div>
+        {% for i in sub %}
+            <div class="trainings">
+                <div class="trainings__top">
+                    <p class="trainings__name">{{ i.program.name }}</p>
+                    <p class="trainings__num">{{ i.workout_stopped }}/{{ i.program.amount_of_workouts }}</p>
+                </div>
+                <div class="trainings__video">
+                    <img src='/media/{{ i.program.main_pic }}' alt="" class="trainings__sample"/>
+                    <img src='../static/images/play-circle.svg' alt="" class="trainings__play"/>
+                </div>
 
 
-        <input type="range" class="scrolling__bar" value="0" id='scrolling__bar' itemref='scrollRef' step="1">
-        <div class="trainings__wrapper" itemref="containerRef" id='trainings__wrapper'>
-            <div class="trainings__trainings" >
-                <div class="trainings__item">
-                    <p class="trainings__item-num">1/30</p>
-                    <div class="trainings__item-frame" style='background-image: url("../../media/{{ i.picture_src }}")'>
-                        <p class="trainings__item-time">29.18</p>
-                        <img src='../static/images/rewind.svg' alt="" class="trainings__item-icon"/>
+                <input type="range" class="scrolling__bar" value="0" id='scrolling__bar' itemref='scrollRef' step="1">
+                <div class="trainings__wrapper" itemref="containerRef" id='trainings__wrapper'>
+                    <div class="trainings__trainings">
+                        {% for k in i.program.workouts %}
+                            <div class="trainings__item">
+                                <p class="trainings__item-num">{{ k.num_in_program }}/{{ i.program.amount_of_workouts }}</p>
+                                <div class="trainings__item-frame"
+                                     style='background-image: url("/media/{{ k.picture_src }}")'>
+                                    <p class="trainings__item-time">{{ k.pub_date }}</p>
+                                    <img src='../static/images/rewind.svg' alt="" class="trainings__item-icon"/>
+                                </div>
+                                <p class="trainings__item-burn">
+                                    <img src='../static/images/fire.svg' alt="" class="trainings__item-fire"/>
+                                    {{ k.calories }} ккал
+                                </p>
+                            </div>
+                        {% endfor %}
+                        <TrainingItem/>
                     </div>
-                    <p class="trainings__item-burn">
-                        <img src='../static/images/fire.svg' alt="" class="trainings__item-fire"/>
-                        520 ккал
-                    </p>
                 </div>
-                <div class="trainings__item">
-                    <p class="trainings__item-num">1/30</p>
-                    <div class="trainings__item-frame" style='background-image: url("../../media/{{ i.picture_src }}")'>
-                        <p class="trainings__item-time">29.18</p>
-                        <img src='../static/images/rewind.svg' alt="" class="trainings__item-icon"/>
+                <div class="trainings__comments">
+                    <div class="trainings__comments-top">
+                        <img src="../static/images/sample-program.png" alt="" class="trainings__program__image">
+                        <div>
+                            <p class="trainings__program-name">Дмитрий Васильев</p>
+                            <p class="trainings__program-title">Стальной пресс</p>
+                        </div>
+                        <div class="last">
+                            <p class="trainings__program-likes">1235
+                                <img src="../static/images/heart.svg" alt="" class="trainings__program-likes"/>
+                            </p>
+                            <p class="trainings__program-completed">123132123 выполнений</p>
+                        </div>
                     </div>
-                    <p class="trainings__item-burn">
-                        <img src='../static/images/fire.svg' alt="" class="trainings__item-fire"/>
-                        520 ккал
-                    </p>
-                </div>
-                <div class="trainings__item">
-                    <p class="trainings__item-num">1/30</p>
-                    <div class="trainings__item-frame" style='background-image: url("../../media/{{ i.picture_src }}")'>
-                        <p class="trainings__item-time">29.18</p>
-                        <img src='../static/images/rewind.svg' alt="" class="trainings__item-icon"/>
+                    <Comment/>
+                    <div class="comment">
+                        <div class="comment__top">
+                            <img src="../static/images/comment-avatar.png" alt="" class="comment__image"/>
+                            {#                    картинка пользователя#}
+                            <div class="comment__misc">
+                                <p class="comment__name">Дмитрий</p>
+                                <p class="comment__time">3 месяца назад</p>
+                            </div>
+                        </div>
+                        <div class="comment__text">
+                            Спасибо большое за эту статью, отличные рецепты, использую их каждый день. Очень вкусно и
+                            полезно,
+                            всем рекомендую попробовать хотя бы раз.
+                        </div>
                     </div>
-                    <p class="trainings__item-burn">
-                        <img src='../static/images/fire.svg' alt="" class="trainings__item-fire"/>
-                        520 ккал
-                    </p>
+                    <Comment/>
                 </div>
-                <div class="trainings__item">
-                    <p class="trainings__item-num">1/30</p>
-                    <div class="trainings__item-frame" style='background-image: url("../../media/{{ i.picture_src }}")'>
-                        <p class="trainings__item-time">29.18</p>
-                        <img src='../static/images/rewind.svg' alt="" class="trainings__item-icon"/>
-                    </div>
-                    <p class="trainings__item-burn">
-                        <img src='../static/images/fire.svg' alt="" class="trainings__item-fire"/>
-                        520 ккал
-                    </p>
-                </div>
-                <div class="trainings__item">
-                    <p class="trainings__item-num">1/30</p>
-                    <div class="trainings__item-frame" style='background-image: url("../../media/{{ i.picture_src }}")'>
-                        <p class="trainings__item-time">29.18</p>
-                        <img src='../static/images/rewind.svg' alt="" class="trainings__item-icon"/>
-                    </div>
-                    <p class="trainings__item-burn">
-                        <img src='../static/images/fire.svg' alt="" class="trainings__item-fire"/>
-                        520 ккал
-                    </p>
-                </div>
-                <div class="trainings__item">
-                    <p class="trainings__item-num">1/30</p>
-                    <div class="trainings__item-frame" style='background-image: url("../../media/{{ i.picture_src }}")'>
-                        <p class="trainings__item-time">29.18</p>
-                        <img src='../static/images/rewind.svg' alt="" class="trainings__item-icon"/>
-                    </div>
-                    <p class="trainings__item-burn">
-                        <img src='../static/images/fire.svg' alt="" class="trainings__item-fire"/>
-                        520 ккал
-                    </p>
-                </div>
-                <div class="trainings__item">
-                    <p class="trainings__item-num">1/30</p>
-                    <div class="trainings__item-frame" style='background-image: url("../../media/{{ i.picture_src }}")'>
-                        <p class="trainings__item-time">29.18</p>
-                        <img src='../static/images/rewind.svg' alt="" class="trainings__item-icon"/>
-                    </div>
-                    <p class="trainings__item-burn">
-                        <img src='../static/images/fire.svg' alt="" class="trainings__item-fire"/>
-                        520 ккал
-                    </p>
-                </div>
-                <div class="trainings__item">
-                    <p class="trainings__item-num">1/30</p>
-                    <div class="trainings__item-frame" style='background-image: url("../../media/{{ i.picture_src }}")'>
-                        <p class="trainings__item-time">29.18</p>
-                        <img src='../static/images/rewind.svg' alt="" class="trainings__item-icon"/>
-                    </div>
-                    <p class="trainings__item-burn">
-                        <img src='../static/images/fire.svg' alt="" class="trainings__item-fire"/>
-                        520 ккал
-                    </p>
-                </div>
-                <TrainingItem/>
-            </div>
-        </div>
-
-
-        <div class="trainings__comments">
-            <div class="trainings__comments-top">
-                <img src="../static/images/sample-program.png" alt="" class="trainings__program__image">
-                <div>
-                    <p class="trainings__program-name">Дмитрий Васильев</p>
-                    <p class="trainings__program-title">Стальной пресс</p>
-                </div>
-                <div class="last">
-                    <p class="trainings__program-likes">1235
-                        <img src="../static/images/heart.svg" alt="" class="trainings__program-likes"/>
-                    </p>
-                    <p class="trainings__program-completed">123132123 выполнений</p>
+                <div class="trainings__review">
+                    <label class="text-field__label">Ваш отзыв
+                        <div class="text-field__box">
+                            <textarea class='text-field__area text-field' placeholder="Текст отзыва"></textarea>
+                        </div>
+                    </label>
                 </div>
             </div>
-            <Comment/>
-            <div class="comment">
-                <div class="comment__top">
-                    <img src="../static/images/comment-avatar.png" alt="" class="comment__image"/>
-                    {#                    картинка пользователя#}
-                    <div class="comment__misc">
-                        <p class="comment__name">Дмитрий</p>
-                        <p class="comment__time">3 месяца назад</p>
-                    </div>
-                </div>
-                <div class="comment__text">
-                    Спасибо большое за эту статью, отличные рецепты, использую их каждый день. Очень вкусно и полезно,
-                    всем рекомендую попробовать хотя бы раз.
-                </div>
-            </div>
-            <Comment/>
-        </div>
-        <div class="trainings__review">
-            <label class="text-field__label">"Ваш отзыв"
-                <div class="text-field__box">
-                    <textarea class='text-field__area text-field' placeholder="Текст отзыва"></textarea>
-                </div>
-            </label>
-        </div>
+        {% endfor %}
     </div>
-</div>
 </div>
 <footer class="footer">
     <div class="footer__main">

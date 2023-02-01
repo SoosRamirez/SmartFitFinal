@@ -219,7 +219,7 @@
                         <img src='../static/images/comment-avatar.png' alt="" class="comment__image"/>
                         <div class="comment__misc">
                             <p class="comment__name">{{ comm.name }}</p>
-                            <p class="comment__time">3 месяца назад</p>
+                            <p class="comment__time">{{ comm.pub_date|date }}</p>
                         </div>
                     </div>
                     <div class="comment__text">

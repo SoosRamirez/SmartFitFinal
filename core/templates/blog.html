@@ -145,23 +145,25 @@
         <p class="_18 blog__subtitle center">Начните лучше понимать своё тело</p>
         <div class="blog__box">
             {% for post in posts %}
-                <a href="{% url 'post' post.id %}">
-                    <div class='blog-slide blog__slide'>
+                <div class='blog-slide blog__slide'>
+                    <a href="{% url 'post' post.id %}">
                         <div class="blog-slide__frame"
                              style='background-image: url("/media/{{ post.preview_pic }}")'></div>
-                        <div class="blog-slide__info">
-                            <p class="blog-slide__title">{{ post.name }}</p>
-                            <div class="blog-slide__misc">
-                                <p class="blog-slide__date">{{ post.pub_date }}</p>
-                                <p class="blog-slide__time"></p>
+                    </a>
+                    <div class="blog-slide__info">
+                        <p class="blog-slide__title">{{ post.name }}</p>
+                        <div class="blog-slide__misc">
+                            <p class="blog-slide__date">{{ post.pub_date }}</p>
+                            <p class="blog-slide__time"></p>
+                            <a href="{% url 'like' post.id %}" class="blog-slide__likes">
                                 <p class="blog-slide__likes">
                                     <img src='../static/images/like.svg' alt="" class="blog-slide__heart">
-                                    {{ post.likes }}
+                                    {{ post.liked|length }}
                                 </p>
-                            </div>
+                            </a>
                         </div>
                     </div>
-                </a>
+                </div>
             {% endfor %}
         </div>
     </div>

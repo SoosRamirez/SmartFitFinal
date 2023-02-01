@@ -5,11 +5,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_protect
 from django.utils import timezone
 
-
 from SmartFitFinal import settings
 from core.forms import CommentForm, PersonalInfoForm, PersonalProgressForm
 from core.models import BlogPost, BlogComment, Trainer, Direction, Trend, WorkoutProgram, Feedback, Question, Workout, \
-    Subscription, PersonalInfo, Payment, Progress
+    Subscription, PersonalInfo, Payment, Progress, Like
 
 
 @login_required
@@ -70,8 +69,18 @@ def personalprogramms(request):
 @login_required
 def personalworkouts(request):
     template = 'personalworkouts.html'
+    # e = WorkoutProgram.objects.filter(subscribers=request.user)
+    # for i in e:
+    #     i.workouts = Workout.objects.filter(program=i)
+    # context = {
+    #     'workout': Workout.objects,
+    #     'programs': WorkoutProgram.objects.filter(subscribers=request.user)
+    # }
+    sub = Subscription.objects.filter(user=request.user)
+    for i in sub:
+        i.program.workouts = Workout.objects.filter(program=i.program)
     context = {
-
+        'sub': sub
     }
     return render(request, template, context)
 
@@ -92,7 +101,8 @@ def personalprogress(request):
                 print(filename)
                 if progress:
                     prev = get_object_or_404(Progress, user=request.user).cur_pic_front.name
-                    Progress.objects.filter(user=request.user).update(cur_pic_front=filename, last_update=timezone.now())
+                    Progress.objects.filter(user=request.user).update(cur_pic_front=filename,
+                                                                      last_update=timezone.now())
                     Progress.objects.filter(user=request.user).update(prev_pic_front=prev, last_update=timezone.now())
                 else:
                     Progress.objects.create(user=request.user, cur_pic_front=filename)
@@ -110,7 +120,7 @@ def personalprogress(request):
                 filename = fs.save(cur_pic_back.name, cur_pic_back)
                 if progress:
                     prev = get_object_or_404(Progress, user=request.user).cur_pic_side.name
-                    Progress.objects.filter(user=request.user).update(cur_pic_back=filename,last_update=timezone.now())
+                    Progress.objects.filter(user=request.user).update(cur_pic_back=filename, last_update=timezone.now())
                     Progress.objects.filter(user=request.user).update(prev_pic_back=prev, last_update=timezone.now())
                 else:
                     Progress.objects.create(user=request.user, cur_pic_back=filename)
@@ -145,7 +155,7 @@ def subscription(request):
 def logingin(request):
     email = request.POST.get('email', False)
     password = request.POST.get('password', False)
-    user = authenticate(request, email=email, password=password)
+    user = authenticate(request, username=email, password=password)
     if user is not None:
         login(request, user)
         return redirect('lk')
@@ -218,8 +228,12 @@ def program(request, program_id):
 
 def blog(request):
     template = 'blog.html'
+    posts = BlogPost.objects.all()
+    for i in posts:
+        i.liked = Like.objects.filter(post=i)
+        print(i)
     context = {
-        'posts': BlogPost.objects.order_by('likes')
+        'posts': posts
     }
     return render(request, template, context)
 
@@ -236,6 +250,7 @@ def blogpost(request, post_id):
         form = CommentForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect(request.path)
     return render(request, template, context)
 
 
@@ -253,6 +268,17 @@ def subscribe(request, program_id):
 def purchase(request):
     template = 'purchase.html'
     context = {
-
+        'reviews': Feedback.objects.all(),
+        'questions': Question.objects.all()
     }
     return render(request, template, context)
+
+
+@login_required
+def like(request, post_id):
+    like = Like.objects.filter(user_id=request.user.id, post_id=post_id)
+    if like:
+        return redirect('blog')
+    else:
+        Like.objects.create(user_id=request.user.id, post_id=post_id)
+    return redirect('blog')

@@ -38,7 +38,7 @@
                         <label class="text-field__label">
                             Ваш пароль
                             <div class="text-field__box">
-                                <input type="text" class='text-field' placeholder="Пароль" name="password">
+                                <input type="password" class='text-field' placeholder="Пароль" name="password">
                             </div>
                         </label>
                     </div>
@@ -160,12 +160,14 @@
                         Новые тренировки каждый месяц
                     </div>
                 </div>
-                <button class='button hero__button' formaction="{% url 'start' %}">
-                    <div class="button__inner">
-                        Начать тренировку
-                        <img src='../static/images/bolt.svg' alt="" class="button__icon">
-                    </div>
-                </button>
+                <a href="{% url 'start' %}">
+                    <button class='button hero__button'>
+                        <div class="button__inner">
+                            Начать тренировку
+                            <img src='../static/images/bolt.svg' alt="" class="button__icon">
+                        </div>
+                    </button>
+                </a>
             </div>
             <div class="hero__right">
                 <img src='../static/images/hero.png' alt="" class="hero__image"/>
@@ -355,12 +357,15 @@
                     </div>
                 </div>
             </div>
-            <button class='button main-blog__button' formaction="{% url 'start' %}">
-                <div class="button__inner">
-                    начать тренировку
-                    <img src='../static/images/bolt.svg' alt="" class="button__icon">
-                </div>
-            </button>
+            <a href="{% url 'start' %}">
+
+                <button class='button main-blog__button' formaction="{% url 'start' %}">
+                    <div class="button__inner">
+                        начать тренировку
+                        <img src='../static/images/bolt.svg' alt="" class="button__icon">
+                    </div>
+                </button>
+            </a>
         </div>
 
         <div class="video">

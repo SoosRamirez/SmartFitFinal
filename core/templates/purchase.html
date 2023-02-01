@@ -53,6 +53,144 @@
             </div>
         </div>
     </div>
+    <div class="modal-background modal-disabled" id='first-modal-background'></div>
+    <div class="modal modal-disabled" id='first-modal-box'>
+        <div class="modal-content">
+            <div class="modal-close" onclick=firstModal()>
+                <img src='../static/images/modal-cross.svg' alt="" class="modal-close-img">
+            </div>
+            <div class="buy-modal">
+                <h2 class="modal-title buy-modal__title">Вечная подписка</h2>
+                <div class="buy-modal__box">
+                    <label class="text-field__label">
+                        Ваша почта
+                        <div class="text-field__box">
+                            <input type="text" class='text-field ' placeholder="Адрес электронной почты">
+                        </div>
+                    </label>
+                    <label class="text-field__label">
+                        Ваш телефон
+                        <div class="text-field__box">
+                            <input type="text" class='text-field ' placeholder="Номер телефона">
+                        </div>
+                    </label>
+                    <label class="text-field__label">
+                        Промокод
+                        <div class="text-field__box">
+                            <input type="text" class='text-field' placeholder='Промокод'>
+                            <button class='button text-field__button'>
+                                <div class="button__inner">
+                                    ok
+                                </div>
+                            </button>
+                        </div>
+                    </label>
+                </div>
+                <div class="buy-modal__pricebox">
+                    Стоимость:
+                    <p class="buy-modal__old">12000 р</p>
+                    <p class="buy-modal__price">9000 р</p>
+                </div>
+                <button class='button buy-modal__button'>
+                    <div class="button__inner">
+                        оплатить
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-background modal-disabled" id='second-modal-background'></div>
+    <div class="modal modal-disabled" id='second-modal-box'>
+        <div class="modal-content">
+            <div class="modal-close" onclick=secondModal()>
+                <img src='../static/images/modal-cross.svg' alt="" class="modal-close-img">
+            </div>
+            <div class="buy-modal">
+                <h2 class="modal-title buy-modal__title">3 месяца</h2>
+                <div class="buy-modal__box">
+                    <label class="text-field__label">
+                        Ваша почта
+                        <div class="text-field__box">
+                            <input type="text" class='text-field ' placeholder="Адрес электронной почты">
+                        </div>
+                    </label>
+                    <label class="text-field__label">
+                        Ваш телефон
+                        <div class="text-field__box">
+                            <input type="text" class='text-field ' placeholder="Номер телефона">
+                        </div>
+                    </label>
+                    <label class="text-field__label">
+                        Промокод
+                        <div class="text-field__box">
+                            <input type="text" class='text-field' placeholder='Промокод'>
+                            <button class='button text-field__button'>
+                                <div class="button__inner">
+                                    ok
+                                </div>
+                            </button>
+                        </div>
+                    </label>
+                </div>
+                <div class="buy-modal__pricebox">
+                    Стоимость:
+                    <p class="buy-modal__old">12000 р</p>
+                    <p class="buy-modal__price">9000 р</p>
+                </div>
+                <button class='button buy-modal__button'>
+                    <div class="button__inner">
+                        оплатить
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-background modal-disabled" id='third-modal-background'></div>
+    <div class="modal modal-disabled" id='third-modal-box'>
+        <div class="modal-content">
+            <div class="modal-close" onclick=thirdModal()>
+                <img src='../static/images/modal-cross.svg' alt="" class="modal-close-img">
+            </div>
+            <div class="buy-modal">
+                <h2 class="modal-title buy-modal__title">3 месяца</h2>
+                <div class="buy-modal__box">
+                    <label class="text-field__label">
+                        Ваша почта
+                        <div class="text-field__box">
+                            <input type="text" class='text-field ' placeholder="Адрес электронной почты">
+                        </div>
+                    </label>
+                    <label class="text-field__label">
+                        Ваш телефон
+                        <div class="text-field__box">
+                            <input type="text" class='text-field ' placeholder="Номер телефона">
+                        </div>
+                    </label>
+                    <label class="text-field__label">
+                        Промокод
+                        <div class="text-field__box">
+                            <input type="text" class='text-field' placeholder='Промокод'>
+                            <button class='button text-field__button'>
+                                <div class="button__inner">
+                                    ok
+                                </div>
+                            </button>
+                        </div>
+                    </label>
+                </div>
+                <div class="buy-modal__pricebox">
+                    Стоимость:
+                    <p class="buy-modal__old">12000 р</p>
+                    <p class="buy-modal__price">9000 р</p>
+                </div>
+                <button class='button buy-modal__button'>
+                    <div class="button__inner">
+                        оплатить
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
     <div class="header__container wrapper">
         <a href="/" class="header__logo-link">
             <img src="../static/images/logo.svg" class="header__logo">
@@ -161,7 +299,7 @@
                     <div class="purchase__item-price">2490 р.</div>
                     <div class="purchase__item-price purchase__item-price-old">9490 р.</div>
                 </div>
-                <button class='button purchase__button'>
+                <button class='button purchase__button' onclick="secondModal()">
                     <div class="button__inner">
                         тренироваться
                     </div>
@@ -181,7 +319,7 @@
                     <div class="purchase__item-price">2490 р.</div>
                     <div class="purchase__item-price purchase__item-price-old">9490 р.</div>
                 </div>
-                <button class='button purchase__button'>
+                <button class='button purchase__button' onclick="thirdModal()">
                     <div class="button__inner">
                         тренироваться
                     </div>
@@ -201,7 +339,7 @@
                     <div class="purchase__item-price">2490 р.</div>
                     <div class="purchase__item-price purchase__item-price-old">9490 р.</div>
                 </div>
-                <button class='button purchase__button'>
+                <button class='button purchase__button' onclick="firstModal()">
                     <div class="button__inner">
                         тренироваться
                     </div>
@@ -211,15 +349,15 @@
         <div class="video">
             <div class="video__left">
                 <button class='button video__button'>
-                <div class="button__inner">
-                    видео о проекте
-                    <img src='../static/images/play-circle.svg' alt="" class="button__icon">
-                </div>
+                    <div class="button__inner">
+                        видео о проекте
+                        <img src='../static/images/play-circle.svg' alt="" class="button__icon">
+                    </div>
                 </button>
             </div>
             <div class="video__right">
                 <h2 class="video__title left">
-                    С чего начинается ваш{" "}
+                    С чего начинается ваш
                     <span class="underline small">результат</span>?
                 </h2>
                 <p class="_18 video__desc">
@@ -250,12 +388,12 @@
                                     {% for i in reviews %}
                                         <div class="swiper-slide">
                                             <div class='review-slide'>
-                                                <div class="review-slide__frame"
-                                                     style='background-image: url("../../media/{{ i.picture_src }}")'>
-                                                    <div class="review-slide__info">
-                                                        <p class="review-slide__name">{name}</p>
-                                                        <p class="review-slide__text _16">{text}</p>
-                                                    </div>
+                                                <div class="review-slide__frame" style='
+                                                        background-image: url("/media/{{ i.image }}")'>
+                                                </div>
+                                                <div class="review-slide__info">
+                                                    <p class="review-slide__name">{{ i.name }}</p>
+                                                    <p class="review-slide__text _16">{{ i.text }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -279,7 +417,7 @@
             </h2>
             <p class="questions__subtitle _18 center">Мы собрали самые часто задаваемые вопросы для вас</p>
             <div class="questions__box">
-                {% for i in list_questions %}
+                {% for i in questions %}
                     <div class="questions__item" onclick="handler({{ forloop.counter }}-1)">
                         <div class="questions__item-top">
                             <p class="questions__item-title">{{ i.title }}</p>
@@ -391,5 +529,38 @@
         loginModal.classList.toggle('modal-disabled')
         loginBackground.classList.toggle('modal-disabled')
     }
+    const firstModal = () => {
+        const firstModal = document.getElementById('first-modal-box')
+        const firstBackground = document.getElementById("first-modal-background")
+        firstModal.classList.toggle('modal-disabled')
+        firstBackground.classList.toggle('modal-disabled')
+    }
+    const secondModal = () => {
+        const secondModal = document.getElementById('second-modal-box')
+        const secondBackground = document.getElementById("second-modal-background")
+        secondModal.classList.toggle('modal-disabled')
+        secondBackground.classList.toggle('modal-disabled')
+    }
+    const thirdModal = () => {
+        const thirdModal = document.getElementById('third-modal-box')
+        const thirdBackground = document.getElementById("third-modal-background")
+        thirdModal.classList.toggle('modal-disabled')
+        thirdBackground.classList.toggle('modal-disabled')
+    }
+</script>
+<script type="module">
+    import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.esm.browser.min.js'
+
+    var galleryTop = new Swiper('.reviews', {
+        centeredSlides: false,
+        loop: false,
+        slidesPerView: "auto",
+        spaceBetween: 40,
+        navigation: {
+            nextEl: `.reviews__next`,
+            prevEl: `.reviews__prev`,
+        },
+    });
+
 </script>
 </html>

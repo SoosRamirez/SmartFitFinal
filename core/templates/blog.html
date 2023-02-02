@@ -147,8 +147,7 @@
             {% for post in posts %}
                 <div class='blog-slide blog__slide'>
                     <a href="{% url 'post' post.id %}">
-                        <div class="blog-slide__frame"
-                             style='background-image: url("/media/{{ post.preview_pic }}")'></div>
+                        <div class="blog-slide__frame" style='background-image: url("/media/{{ post.preview_pic }}")'></div>
                     </a>
                     <div class="blog-slide__info">
                         <p class="blog-slide__title">{{ post.name }}</p>
@@ -157,8 +156,7 @@
                             <p class="blog-slide__time"></p>
                             <a href="{% url 'like' post.id %}" class="blog-slide__likes">
                                 <p class="blog-slide__likes">
-                                    <img src='../static/images/like.svg' alt="" class="blog-slide__heart">
-                                    {{ post.liked|length }}
+                                    <img src='../static/images/like.svg' alt="" class="blog-slide__heart">{{ post.liked|length }}
                                 </p>
                             </a>
                         </div>

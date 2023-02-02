@@ -28,6 +28,7 @@ urlpatterns = [
     path('personal/info', views.personalinfo, name='personalinfo'),
     path('personal/programs', views.personalprogramms, name='personalprograms'),
     path('personal/workouts', views.personalworkouts, name='personalworkouts'),
+    path('personal/workouts/<int:program_id>', views.personalworkout, name='personalworkout'),
     path('personal/progres', views.personalprogress, name='personalprogres'),
     path('personal/subscription', views.subscription, name='subscription'),
     path('', views.home, name='home'),

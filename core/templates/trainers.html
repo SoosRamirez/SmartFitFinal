@@ -149,8 +149,8 @@
                     <div class="carousel__swiper swiper-container trainers__carousel-1">
                         <div class="swiper-wrapper">
                             {% for i in all %}
-                                <a href="{% url 'trainer' i.id %}">
-                                    <div class="swiper-slide">
+                                <div class="swiper-slide">
+                                    <a href="{% url 'trainer' i.id %}">
                                         <div class="trainer-slide">
                                             <div class="trainer-slide__frame"
                                                  style='background-image: url("/media/{{ i.preview_pic }}")'></div>
@@ -175,8 +175,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             {% endfor %}
                         </div>
                     </div>
@@ -195,9 +195,8 @@
                     <div class="carousel__swiper swiper-container trainers__carousel-2">
                         <div class="swiper-wrapper">
                             {% for i in popular %}
-                                <a href="{% url 'trainer' i.id %}">
-
-                                    <div class="swiper-slide">
+                                <div class="swiper-slide">
+                                    <a href="{% url 'trainer' i.id %}">
                                         <div class="trainer-slide">
                                             <div class="trainer-slide__frame"
                                                  style='background-image: url("../../media/{{ i.preview_pic }}")'></div>
@@ -222,8 +221,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             {% endfor %}
                         </div>
                     </div>
@@ -252,9 +251,8 @@
                         <div class="carousel__swiper swiper-container trainers-mobile">
                             <div class="swiper-wrapper">
                                 {% for i in all %}
-                                    <a href="{% url 'trainer' i.id %}">
-                                        <div class="swiper-slide
-                                                {% for j in i.direction.all %}{{ j.id }} {% endfor %} trainers_filter_slide">
+                                    <div class="swiper-slide {% for j in i.direction.all %}{{ j.id }} {% endfor %} trainers_filter_slide">
+                                        <a href="{% url 'trainer' i.id %}">
                                             <div class="trainer-slide">
                                                 <div class="trainer-slide__frame" style='
                                                         background-image:url("/media/{{ i.preview_pic }}") '></div>
@@ -279,8 +277,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
+                                        </a>
+                                    </div>
                                 {% endfor %}
                             </div>
                         </div>

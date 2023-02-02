@@ -85,6 +85,18 @@ def personalworkouts(request):
     return render(request, template, context)
 
 
+@login_required
+def personalworkout(request, program_id):
+    print('hello')
+    template = 'personalworkout.html'
+    prog = WorkoutProgram.objects.get(id=program_id)
+    prog.workout_stopped = get_object_or_404(Subscription, user=request.user, program_id=program_id).workout_stopped
+    prog.workouts = Workout.objects.filter(program=prog)
+    context = {
+        'program': prog,
+    }
+    return render(request, template, context)
+
 @csrf_protect
 @login_required
 def personalprogress(request):

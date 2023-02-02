@@ -157,11 +157,11 @@
         <div class="wrapper">
             <div class='carousel programs__carousel-first'>
                 <div class="carousel__inner  ">
-                    <div class="carousel__swiper swiper-container programs-slider_trg">
+                    <div class="carousel__swiper swiper-container programs__carousel-first">
                         <div class="swiper-wrapper">
                             {% for i in all %}
-                                <a href="{% url 'program' i.id %}">
-                                    <div class="swiper-slide">
+                                <div class="swiper-slide">
+                                    <a href="{% url 'program' i.id %}">
                                         <div class="program-slide program-slide_trend {{ i.directions.id }}">
                                             <div class="program-slide__frame"
                                                  style='background-image:url("/media/{{ i.preview_pic }}");background-size:cover;background-position:center'>
@@ -187,8 +187,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             {% endfor %}
                         </div>
                     </div>
@@ -207,8 +207,8 @@
                     <div class="carousel__swiper swiper-container programs__carousel-new">
                         <div class="swiper-wrapper">
                             {% for i in new %}
-                                <a href="{% url 'program' i.id %}">
-                                    <div class="swiper-slide">
+                                <div class="swiper-slide">
+                                    <a href="{% url 'program' i.id %}">
                                         <div class="program-slide">
                                             <div class="program-slide__frame"
                                                  style='background-image:url("/media/{{ i.preview_pic }}");background-size: cover;background-position: center'>
@@ -234,8 +234,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             {% endfor %}
                         </div>
                     </div>
@@ -254,8 +254,8 @@
                     <div class="carousel__swiper swiper-container programs__carousel-popular">
                         <div class="swiper-wrapper">
                             {% for i in pop %}
-                                <a href="{% url 'program' i.id %}">
-                                    <div class="swiper-slide">
+                                <div class="swiper-slide">
+                                    <a href="{% url 'program' i.id %}">
                                         <div class="program-slide">
                                             <div class="program-slide__frame"
                                                  style='background-image:url("/media/{{ i.preview_pic }}");background-size: cover;background-position: center'>
@@ -281,8 +281,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             {% endfor %}
                         </div>
                     </div>
@@ -306,8 +306,8 @@
         </div>
         <div class="programs__box">
             {% for i in all %}
-                <a href="{% url 'program' i.id %}">
-                    <div class="program-slide program-slide_all {{ i.directions.id }}">
+                <div class="program-slide program-slide_all {{ i.directions.id }}">
+                    <a href="{% url 'program' i.id %}">
                         <div class="program-slide__frame"
                              style="background-image:url('/media/{{ i.preview_pic }}'); background-size:cover; background-position:center ">
                         </div>
@@ -328,8 +328,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             {% endfor %}
         </div>
     </div>
@@ -347,16 +347,16 @@
                                 <div class="swiper-wrapper">
                                     {% for i in reviews %}
                                         <div class="swiper-slide">
-                                        <div class='review-slide'>
-                                            <div class="review-slide__frame" style='
-                                                    background-image: url("/media/{{ i.image }}")'>
-                                            </div>
-                                            <div class="review-slide__info">
-                                                <p class="review-slide__name">{{ i.name }}</p>
-                                                <p class="review-slide__text _16">{{ i.text }}</p>
+                                            <div class='review-slide'>
+                                                <div class="review-slide__frame" style='
+                                                        background-image: url("/media/{{ i.image }}")'>
+                                                </div>
+                                                <div class="review-slide__info">
+                                                    <p class="review-slide__name">{{ i.name }}</p>
+                                                    <p class="review-slide__text _16">{{ i.text }}</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
                                     {% endfor %}
                                 </div>
                             </div>

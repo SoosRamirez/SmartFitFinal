@@ -5,6 +5,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_protect
 from django.utils import timezone
 
+import uuid
+
+from yookassa import Configuration, Payment
+
+# Configuration.account_id = <Идентификатор магазина>
+# Configuration.secret_key = <Секретный ключ>
+
 from SmartFitFinal import settings
 from core.forms import CommentForm, PersonalInfoForm, PersonalProgressForm
 from core.models import BlogPost, BlogComment, Trainer, Direction, Trend, WorkoutProgram, Feedback, Question, Workout, \
@@ -279,6 +286,18 @@ def subscribe(request, program_id):
 @csrf_protect
 def purchase(request):
     template = 'purchase.html'
+    payment = Payment.create({
+        "amount": {
+            "value": "100.00",
+            "currency": "RUB"
+        },
+        "confirmation": {
+            "type": "redirect",
+            "return_url": "https://www.example.com/return_url"
+        },
+        "capture": True,
+        "description": "Заказ №1"
+    }, uuid.uuid4())
     context = {
         'reviews': Feedback.objects.all(),
         'questions': Question.objects.all()

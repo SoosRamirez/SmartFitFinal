@@ -152,7 +152,7 @@
                     <div class="blog-slide__info">
                         <p class="blog-slide__title">{{ post.name }}</p>
                         <div class="blog-slide__misc">
-                            <p class="blog-slide__date">{{ post.pub_date }}</p>
+                            <p class="blog-slide__date">{{ post.pub_date|date:"d.m.Y" }}</p>
                             <p class="blog-slide__time"></p>
                             <a href="{% url 'like' post.id %}" class="blog-slide__likes">
                                 <p class="blog-slide__likes">

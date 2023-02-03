@@ -138,7 +138,7 @@
     </div>
 </header>
 <div class="trainer">
-    <div class="trainer__upper">
+    <div class="trainer__upper" style='background-image: url("/media/{{ trainer.main_pic }}")'>
         <div class="trainer__inner h wrapper">
             <div class="trainer__left">
                 <p class="trainer__subtitle">Тренер</p>
@@ -152,35 +152,32 @@
                 <p class="trainer__info">
                     <span>{{ trainer.subscribers }}</span>Человек занимается
                 </p>
+		<a href="{% url 'start' %}">
                 <button class='button trainer__button'>
                     <div class="button__inner">
                         начать тренировку<img src='../static/images/bolt.svg' alt="" class="button__icon">
                     </div>
                 </button>
+		</a>
             </div>
             <div class="trainer__frame">
-                <img src='../static/images/outline.svg' alt="" class="trainer__background"/>
-                <img src='/media/{{ trainer.main_pic }}' alt="" class="trainer__image"/>
             </div>
+		<a href="{% url 'start' %}">
             <button class='button trainer__button mobile' formaction="{% url 'programs' %}">
                 <div class="button__inner">
                     начать тренировку
                     <img src='../static/images/bolt.svg' alt="" class="button__icon">
                 </div>
             </button>
+		</a>
         </div>
     </div>
     <div class="trainer__inner wrapper">
         <h2 class="center trainer__h2 m">О <span class="underline">тренере</span></h2>
         <div class="trainer__about video">
-            <div class="video__left">
-                <button class='button video__button'>
-                    <div class="button__inner">
-                        видео о тренере
-                        <img src='../static/images/play-circle.svg' alt="" class="button__icon">
-                    </div>
-                </button>
-            </div>
+	<div class="video__lefttt">
+            {{ trainer.video|safe }}
+	</div>
             <div class="video__right">
                 <p class="_18 video__desc">
                     {{ trainer.bio }}

@@ -873,7 +873,6 @@ b {
     .video__left::before {
       content: '';
       position: absolute;
-      background-image: url("../images/video_background.png");
       top: 0;
       left: 0;
       width: 100%;

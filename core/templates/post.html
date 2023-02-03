@@ -142,7 +142,7 @@
 <div class="post-page page">
     <div class="post-page__wrapper wrapper">
         <h1 class="post-page__title title">
-            {{ post.name|safe }}
+            {{ post.name }}
         </h1>
         <div class="post-page__info">
             {{ post.pub_date }}
@@ -153,18 +153,6 @@
             <img src='/media/{{ post.main_pic }}' alt="" class="post-page__image"/>
             <p class="post-page__paragraph">
                 {{ post.text|safe }}
-            </p>
-            <h2 class="post-page__subtitle">Ленивая овсянка в банке</h2>
-            <p class="post-page__paragraph">
-                Любишь завтракать на ходу или вовсе обходишься чашечкой кофе с утра?
-                А ведь именно завтрак задает настрой на весь день. <br/>
-                <br/>
-                Посвяти 15 минут вкусному полезному завтраку и ты почувствуешь
-                прилив сил и бодрости, а ранний подъем не будет казаться таким уж и
-                ранним. <br/>
-                <br/>
-                Мы подобрали для тебя 5 самых полезных рецептов на завтрак, которые
-                насытят организм энергией и удержат тебя от частых перекусов.
             </p>
         </div>
         <div class="post-page__form">
@@ -184,7 +172,7 @@
                         </div>
                     </label>
                 </div>
-                <label class="text-field__label">
+                <label class="text-field__label"  style="margin-bottom: 20px">
                     Ваш отзыв
                     <div class="text-field__box">
                         <textarea class='text-field__area text-field' placeholder="Текст отзыва" name="text"></textarea>
@@ -200,19 +188,6 @@
             </form>
         </div>
         <div class="post-page__comments">
-            <div class="comment">
-                <div class="comment__top">
-                    <img src=' ../static/images/comment-avatar.png' alt="" class="comment__image"/>
-                    <div class="comment__misc">
-                        <p class="comment__name">Дмитрий</p>
-                        <p class="comment__time">3 месяца назад</p>
-                    </div>
-                </div>
-                <div class="comment__text">
-                    Спасибо большое за эту статью, отличные рецепты, использую их каждый день. Очень вкусно и полезно,
-                    всем рекомендую попробовать хотя бы раз.
-                </div>
-            </div>
             {% for comm in comments %}
                 <div class="comment">
                     <div class="comment__top">
@@ -259,7 +234,7 @@
                                                     <p class="blog-slide__likes">
                                                         <img src='../static/images/like.svg' alt=""
                                                              class="blog-slide__heart"/>
-                                                        {{ other.likes }}
+                                                        {{ other.liked|length }}
                                                     </p>
                                                 </div>
                                             </div>

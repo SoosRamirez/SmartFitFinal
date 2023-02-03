@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-m&^(26=(8$s7_nata@9ug24zab*hijz!v)0m&-ooxm*97_p%j^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['194.67.111.141', 'localhost', 'www.smart-fit.online', '127.0.0.1']
+ALLOWED_HOSTS = ['194.67.116.128', 'localhost', 'www.smart-fit.online', '127.0.0.1']
 
 # Application definition
 
@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'SmartFitFinal.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'smartfit',
+	'USER': 'smartfit',
+        'PASSWORD': 'new1234pass',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -116,7 +120,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/Users/aleksejkomarov/PycharmProjects/SmartFitFinal/media'
+MEDIA_ROOT = '/home/soos/SmartFitFinal/media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

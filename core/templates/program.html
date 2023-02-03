@@ -139,11 +139,11 @@
     </div>
 </header>
 <div class="program-page trainer">
-    <div class="trainer__upper">
+    <div class="trainer__upper" style='background-image: url("/media/{{ program.trainer.main_pic }}")'>
         <div class="trainer__inner h wrapper">
             <div class="trainer__left">
                 <p class="trainer__subtitle">Программа</p>
-                <h1 class="trainer__title">СТАЛЬНОЙ ПРЕСС</h1>
+                <h1 class="trainer__title">{{ program.name }}</h1>
                 <p class="trainer__info">
                     <span>{{ workouts|length }}</span> Тренировок в программе
                 </p>
@@ -162,8 +162,6 @@
                 </form>
             </div>
             <div class="trainer__frame">
-                <img src='../static/images/outline.svg' alt="" class="trainer__background"/>
-                <img src='/media/{{ program.trainer.main_pic }}' alt="" class="trainer__image"/>
             </div>
             <button class='button trainer__button mobile'>
                 <div class="button__inner">начать тренировку
@@ -175,7 +173,7 @@
     <div class="trainer__inner wrapper">
         <div class="video program__video">
             <div class="video__left program__frame">
-                <img src='../static/images/video.svg' alt="" class="program__play"/>
+                {{ program.video }}
             </div>
             <div class="video__right">
                 <h2 class="video__title program__title">О программе</h2>

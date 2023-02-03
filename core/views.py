@@ -1,6 +1,5 @@
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import AnonymousUser
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_protect
@@ -251,6 +250,7 @@ def blog(request):
     posts = BlogPost.objects.all()
     for i in posts:
         i.liked = Like.objects.filter(post=i)
+        print(i)
     context = {
         'posts': posts
     }
@@ -286,18 +286,18 @@ def subscribe(request, program_id):
 @csrf_protect
 def purchase(request):
     template = 'purchase.html'
-    # payment = Payment.create({
-    #     "amount": {
-    #         "value": "100.00",
-    #         "currency": "RUB"
-    #     },
-    #     "confirmation": {
-    #         "type": "redirect",
-    #         "return_url": "https://www.example.com/return_url"
-    #     },
-    #     "capture": True,
-    #     "description": "Заказ №1"
-    # }, uuid.uuid4())
+#    payment = Payment.create({
+ #       "amount": {
+  #          "value": "100.00",
+   #         "currency": "RUB"
+    #    },
+#        "confirmation": {
+#            "type": "redirect",
+ #           "return_url": "https://www.example.com/return_url"
+  #      },
+   #     "capture": True,
+    #    "description": "Заказ №1"
+   # }, uuid.uuid4())
     context = {
         'reviews': Feedback.objects.all(),
         'questions': Question.objects.all()
@@ -306,8 +306,7 @@ def purchase(request):
 
 
 def like(request, post_id):
-    if request.user is not AnonymousUser:
-        print(request.user)
+    if request.user.is_authenticated == True:
         like = Like.objects.filter(user_id=request.user.id, post_id=post_id)
         if like:
             like.delete()

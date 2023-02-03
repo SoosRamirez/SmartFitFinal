@@ -1,5 +1,6 @@
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import AnonymousUser
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_protect
@@ -250,7 +251,6 @@ def blog(request):
     posts = BlogPost.objects.all()
     for i in posts:
         i.liked = Like.objects.filter(post=i)
-        print(i)
     context = {
         'posts': posts
     }
@@ -305,11 +305,12 @@ def purchase(request):
     return render(request, template, context)
 
 
-@login_required
 def like(request, post_id):
-    like = Like.objects.filter(user_id=request.user.id, post_id=post_id)
-    if like:
-        return redirect('blog')
-    else:
-        Like.objects.create(user_id=request.user.id, post_id=post_id)
+    if request.user is not AnonymousUser:
+        print(request.user)
+        like = Like.objects.filter(user_id=request.user.id, post_id=post_id)
+        if like:
+            like.delete()
+        else:
+            Like.objects.create(user_id=request.user.id, post_id=post_id)
     return redirect('blog')

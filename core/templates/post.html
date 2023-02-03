@@ -142,7 +142,7 @@
 <div class="post-page page">
     <div class="post-page__wrapper wrapper">
         <h1 class="post-page__title title">
-            {{ post.name }}
+            {{ post.name|safe }}
         </h1>
         <div class="post-page__info">
             {{ post.pub_date }}
@@ -152,7 +152,7 @@
         <div class="post-page__content">
             <img src='/media/{{ post.main_pic }}' alt="" class="post-page__image"/>
             <p class="post-page__paragraph">
-                {{ post.text }}
+                {{ post.text|safe }}
             </p>
             <h2 class="post-page__subtitle">Ленивая овсянка в банке</h2>
             <p class="post-page__paragraph">
